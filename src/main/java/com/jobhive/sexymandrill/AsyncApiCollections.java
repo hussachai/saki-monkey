@@ -3,6 +3,7 @@ package com.jobhive.sexymandrill;
 import com.jobhive.sexymandrill.api.async.MessageAsyncApi;
 import com.jobhive.sexymandrill.api.async.RejectAsyncApi;
 import com.jobhive.sexymandrill.api.async.SenderAsyncApi;
+import com.jobhive.sexymandrill.api.async.SubaccountAsyncApi;
 import com.jobhive.sexymandrill.api.async.TagAsyncApi;
 import com.jobhive.sexymandrill.api.async.TemplateAsyncApi;
 import com.jobhive.sexymandrill.api.async.UrlAsyncApi;
@@ -35,6 +36,9 @@ public class AsyncApiCollections {
     
     private WebhookAsyncApi webhookApi;
     
+    private SubaccountAsyncApi subaccountApi;
+    
+    
     public AsyncApiCollections(MandrillAsyncClient client) {
         this.userApi = new UserAsyncApi(client);
         this.messageApi = new MessageAsyncApi(client);
@@ -45,6 +49,7 @@ public class AsyncApiCollections {
         this.urlApi = new UrlAsyncApi(client);
         this.templateApi = new TemplateAsyncApi(client);
         this.webhookApi = new WebhookAsyncApi(client);
+        this.subaccountApi = new SubaccountAsyncApi(client);
     }
     
     public UserAsyncApi users() {
@@ -81,5 +86,9 @@ public class AsyncApiCollections {
     
     public WebhookAsyncApi webhooks(){
         return webhookApi;
+    }
+    
+    public SubaccountAsyncApi subacccounts(){
+        return subaccountApi;
     }
 }

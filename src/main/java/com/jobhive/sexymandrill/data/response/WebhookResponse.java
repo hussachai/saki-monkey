@@ -18,7 +18,7 @@ public class WebhookResponse {
     /**
      * a unique integer indentifier for the webhook
      */
-    private int id;
+    private Integer id;
     
     /**
      * The URL that the event data will be posted to
@@ -57,12 +57,12 @@ public class WebhookResponse {
     /**
      * the number of event batches that have ever been sent to this webhook
      */
-    private int batchesSent;
+    private Integer batchesSent;
     
     /**
      * the total number of events that have ever been sent to this webhook
      */
-    private int eventsSent;
+    private Integer eventsSent;
     
     /**
      * if we've ever gotten an error trying to post to this webhook, 
@@ -70,11 +70,11 @@ public class WebhookResponse {
      */
     private String lastError;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
     
-    public WebhookResponse setId(int id) {
+    public WebhookResponse setId(Integer id) {
         this.id = id;
         return this;
     }
@@ -138,20 +138,20 @@ public class WebhookResponse {
         return this;
     }
 
-    public int getBatchesSent() {
+    public Integer getBatchesSent() {
         return batchesSent;
     }
 
-    public WebhookResponse setBatchesSent(int batchesSent) {
+    public WebhookResponse setBatchesSent(Integer batchesSent) {
         this.batchesSent = batchesSent;
         return this;
     }
 
-    public int getEventsSent() {
+    public Integer getEventsSent() {
         return eventsSent;
     }
 
-    public WebhookResponse setEventsSent(int eventsSent) {
+    public WebhookResponse setEventsSent(Integer eventsSent) {
         this.eventsSent = eventsSent;
         return this;
     }
