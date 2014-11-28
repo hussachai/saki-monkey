@@ -1,5 +1,6 @@
 package com.jobhive.sexymandrill;
 
+import com.jobhive.sexymandrill.api.async.ExportAsyncApi;
 import com.jobhive.sexymandrill.api.async.InboundAsyncApi;
 import com.jobhive.sexymandrill.api.async.MessageAsyncApi;
 import com.jobhive.sexymandrill.api.async.RejectAsyncApi;
@@ -41,18 +42,21 @@ public class AsyncApiCollections {
     
     private InboundAsyncApi inboundApi;
     
+    private ExportAsyncApi exportApi;
+    
     public AsyncApiCollections(MandrillAsyncClient client) {
-        this.userApi = new UserAsyncApi(client);
-        this.messageApi = new MessageAsyncApi(client);
-        this.tagApi = new TagAsyncApi(client);
-        this.rejectApi = new RejectAsyncApi(client);
-        this.whitelistApi = new WhitelistAsyncApi(client);
-        this.senderApi = new SenderAsyncApi(client);
-        this.urlApi = new UrlAsyncApi(client);
-        this.templateApi = new TemplateAsyncApi(client);
-        this.webhookApi = new WebhookAsyncApi(client);
-        this.subaccountApi = new SubaccountAsyncApi(client);
-        this.inboundApi = new InboundAsyncApi(client);
+        userApi = new UserAsyncApi(client);
+        messageApi = new MessageAsyncApi(client);
+        tagApi = new TagAsyncApi(client);
+        rejectApi = new RejectAsyncApi(client);
+        whitelistApi = new WhitelistAsyncApi(client);
+        senderApi = new SenderAsyncApi(client);
+        urlApi = new UrlAsyncApi(client);
+        templateApi = new TemplateAsyncApi(client);
+        webhookApi = new WebhookAsyncApi(client);
+        subaccountApi = new SubaccountAsyncApi(client);
+        inboundApi = new InboundAsyncApi(client);
+        exportApi = new ExportAsyncApi(client);
     }
     
     public UserAsyncApi users() {
@@ -97,5 +101,9 @@ public class AsyncApiCollections {
     
     public InboundAsyncApi inbound(){
         return inboundApi;
+    }
+    
+    public ExportAsyncApi exports(){
+        return exportApi;
     }
 }

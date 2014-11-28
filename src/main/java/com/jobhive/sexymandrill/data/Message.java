@@ -1,15 +1,13 @@
 package com.jobhive.sexymandrill.data;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.jobhive.sexymandrill.utils.Assert;
+import com.jobhive.sexymandrill.utils.Literal;
 
 /**
  * the information on the message to send
@@ -48,7 +46,7 @@ public class Message {
      * an array of recipient information.
      */
     @JsonProperty("to")
-    private List<Recipient> recipients;
+    private Set<Recipient> recipients;
 
     /**
      * optional extra headers to add to the message (most headers are allowed)
@@ -145,14 +143,14 @@ public class Message {
      * per recipient.
      */
     @JsonProperty("global_merge_vars")
-    private List<Var> globalVars;
+    private Set<Var> globalVars;
 
     /**
      * per-recipient merge variables, which override global merge variables with
      * the same name.
      */
     @JsonProperty("merge_vars")
-    private List<RecipientVars> recipientVars;
+    private Set<RecipientVars> recipientVars;
 
     /**
      * an array of string to tag the message with. Stats are accumulated using
@@ -176,7 +174,7 @@ public class Message {
      * automatically have Google Analytics parameters appended to their query
      * string automatically.
      */
-    private List<String> googleAnalyticsDomains;
+    private Set<String> googleAnalyticsDomains;
 
     /**
      * optional string indicating the value to set for the utm_campaign tracking
@@ -197,17 +195,17 @@ public class Message {
      * Per-recipient metadata that will override the global values specified in
      * the metadata parameter.
      */
-    private List<RecipientMetaData> recipientMetadata;
+    private Set<RecipientMetaData> recipientMetadata;
 
     /**
      * an array of supported attachments to add to the message
      */
-    private List<Attachment> attachments;
+    private Set<Attachment> attachments;
 
     /**
      * an array of embedded images to add to the message
      */
-    private List<EmbeddedImage> images;
+    private Set<EmbeddedImage> images;
 
     public String getHtml() {
         return html;
@@ -254,14 +252,14 @@ public class Message {
         return this;
     }
 
-    public List<Recipient> getRecipients() {
+    public Set<Recipient> getRecipients() {
         return recipients;
     }
 
-    public Message setRecipients(List<Recipient> recipients) {
+    public Message setRecipients(Set<Recipient> recipients) {
         this.recipients = recipients;
         if (recipients != null) {
-            this.recipientVars = new ArrayList<>();
+            this.recipientVars = new HashSet<>();
             for (Recipient recipient : recipients) {
                 this.recipientVars.add(new RecipientVars(recipient.getEmail(),
                         recipient.getVars()));
@@ -273,8 +271,8 @@ public class Message {
     public Message addRecipient(Recipient recipient) {
         Assert.notNull(recipient, "recipient");
         if (this.recipients == null) {
-            this.recipients = new ArrayList<>();
-            this.recipientVars = new ArrayList<>();
+            this.recipients = new HashSet<>();
+            this.recipientVars = new HashSet<>();
         }
         this.recipients.add(recipient);
         this.recipientVars.add(new RecipientVars(recipient.getEmail(),
@@ -435,11 +433,11 @@ public class Message {
         return this;
     }
 
-    public List<Var> getGlobalVars() {
+    public Set<Var> getGlobalVars() {
         return globalVars;
     }
 
-    public Message setGlobalVars(List<Var> globalVars) {
+    public Message setGlobalVars(Set<Var> globalVars) {
         this.globalVars = globalVars;
         return this;
     }
@@ -447,7 +445,7 @@ public class Message {
     public Message addGlobalVar(Var globalVar) {
         Assert.notNull(globalVar, "globalVar");
         if (this.globalVars == null) {
-            this.globalVars = new ArrayList<>();
+            this.globalVars = new HashSet<>();
         }
         this.globalVars.add(globalVar);
         return this;
@@ -481,19 +479,17 @@ public class Message {
         return this;
     }
 
-    public List<String> getGoogleAnalyticsDomains() {
+    public Set<String> getGoogleAnalyticsDomains() {
         return googleAnalyticsDomains;
     }
 
-    public Message setGoogleAnalyticsDomains(List<String> googleAnalyticsDomains) {
+    public Message setGoogleAnalyticsDomains(Set<String> googleAnalyticsDomains) {
         this.googleAnalyticsDomains = googleAnalyticsDomains;
         return this;
     }
 
     public Message setGoogleAnalyticsDomains(String... googleAnalyticsDomains) {
-        if (googleAnalyticsDomains != null) {
-            this.googleAnalyticsDomains = Arrays.asList(googleAnalyticsDomains);
-        }
+        this.googleAnalyticsDomains = Literal.set(googleAnalyticsDomains);
         return this;
     }
 
@@ -524,12 +520,12 @@ public class Message {
         return this;
     }
 
-    public List<RecipientMetaData> getRecipientMetadata() {
+    public Set<RecipientMetaData> getRecipientMetadata() {
         return recipientMetadata;
     }
 
     public Message setRecipientMetadata(
-            List<RecipientMetaData> recipientMetadata) {
+            Set<RecipientMetaData> recipientMetadata) {
         this.recipientMetadata = recipientMetadata;
         return this;
     }
@@ -537,17 +533,17 @@ public class Message {
     public Message addRecipientMetadata(RecipientMetaData recipientMetadata) {
         Assert.notNull(recipientMetadata, "recipientMetadata");
         if (this.recipientMetadata == null) {
-            this.recipientMetadata = new ArrayList<>();
+            this.recipientMetadata = new HashSet<>();
         }
         this.recipientMetadata.add(recipientMetadata);
         return this;
     }
 
-    public List<Attachment> getAttachments() {
+    public Set<Attachment> getAttachments() {
         return attachments;
     }
 
-    public Message setAttachments(List<Attachment> attachments) {
+    public Message setAttachments(Set<Attachment> attachments) {
         this.attachments = attachments;
         return this;
     }
@@ -555,17 +551,17 @@ public class Message {
     public Message addAttachment(Attachment attachment) {
         Assert.notNull(attachment, "attachment");
         if (this.attachments == null) {
-            this.attachments = new ArrayList<>();
+            this.attachments = new HashSet<>();
         }
         this.attachments.add(attachment);
         return this;
     }
 
-    public List<EmbeddedImage> getImages() {
+    public Set<EmbeddedImage> getImages() {
         return images;
     }
 
-    public Message setImages(List<EmbeddedImage> images) {
+    public Message setImages(Set<EmbeddedImage> images) {
         this.images = images;
         return this;
     }
@@ -573,7 +569,7 @@ public class Message {
     public Message addImage(EmbeddedImage image) {
         Assert.notNull(image, "image");
         if (this.images == null) {
-            this.images = new ArrayList<>();
+            this.images = new HashSet<>();
         }
         this.images.add(image);
         return this;

@@ -1,6 +1,10 @@
 package com.jobhive.sexymandrill.data;
 
-
+/**
+ * 
+ * @author Hussachai
+ *
+ */
 public class ClickDetail extends OpenDetail {
 
     /**

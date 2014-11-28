@@ -30,6 +30,33 @@ public class RecipientVars {
         setRcpt(rcpt);
         setVars(vars);
     }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((rcpt == null) ? 0 : rcpt.hashCode());
+        return result;
+    }
+
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        RecipientVars other = (RecipientVars) obj;
+        if (rcpt == null) {
+            if (other.rcpt != null)
+                return false;
+        } else if (!rcpt.equals(other.rcpt))
+            return false;
+        return true;
+    }
+
 
     public String getRcpt() {
         return rcpt;

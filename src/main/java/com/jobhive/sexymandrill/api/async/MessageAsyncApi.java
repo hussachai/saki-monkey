@@ -13,7 +13,7 @@ import com.jobhive.sexymandrill.api.async.callback.ObjectResponseCallback;
 import com.jobhive.sexymandrill.data.Message;
 import com.jobhive.sexymandrill.data.TemplateContent;
 import com.jobhive.sexymandrill.data.param.MessageSearchParams;
-import com.jobhive.sexymandrill.data.param.RawMessageParams;
+import com.jobhive.sexymandrill.data.param.MessageSendRawParams;
 import com.jobhive.sexymandrill.data.response.MessageContent;
 import com.jobhive.sexymandrill.data.response.MessageInfo;
 import com.jobhive.sexymandrill.data.response.MessageStatus;
@@ -98,7 +98,7 @@ public class MessageAsyncApi extends MandrillAsyncApi {
                 mapParams("raw_message", rawMessage), callback);
     }
 
-    public Future<HttpResponse> sendRaw(RawMessageParams rawMessage,
+    public Future<HttpResponse> sendRaw(MessageSendRawParams rawMessage,
             ObjectResponseCallback<MessageStatus[]> callback) {
         return getClient().execute("/messages/send-raw.json", rawMessage, callback);
     }

@@ -1,5 +1,10 @@
 package com.jobhive.sexymandrill.data;
 
+/**
+ * 
+ * @author Hussachai
+ *
+ */
 public class DomainRecord {
     
     private Boolean valid;
