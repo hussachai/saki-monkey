@@ -7,6 +7,7 @@ import com.jobhive.sexymandrill.api.async.TagAsyncApi;
 import com.jobhive.sexymandrill.api.async.TemplateAsyncApi;
 import com.jobhive.sexymandrill.api.async.UrlAsyncApi;
 import com.jobhive.sexymandrill.api.async.UserAsyncApi;
+import com.jobhive.sexymandrill.api.async.WebhookAsyncApi;
 import com.jobhive.sexymandrill.api.async.WhitelistAsyncApi;
 
 /**
@@ -32,6 +33,8 @@ public class AsyncApiCollections {
     
     private TemplateAsyncApi templateApi;
     
+    private WebhookAsyncApi webhookApi;
+    
     public AsyncApiCollections(MandrillAsyncClient client) {
         this.userApi = new UserAsyncApi(client);
         this.messageApi = new MessageAsyncApi(client);
@@ -41,6 +44,7 @@ public class AsyncApiCollections {
         this.senderApi = new SenderAsyncApi(client);
         this.urlApi = new UrlAsyncApi(client);
         this.templateApi = new TemplateAsyncApi(client);
+        this.webhookApi = new WebhookAsyncApi(client);
     }
     
     public UserAsyncApi users() {
@@ -73,5 +77,9 @@ public class AsyncApiCollections {
     
     public TemplateAsyncApi templates(){
         return templateApi;
+    }
+    
+    public WebhookAsyncApi webhooks(){
+        return webhookApi;
     }
 }
