@@ -1,0 +1,12 @@
+
+*.jar
+*.class
+
+/.settings
+/target
+.classpath
+.project
+
+/src/test/resources/credential.conf
+/src/test/java/*.java
+
