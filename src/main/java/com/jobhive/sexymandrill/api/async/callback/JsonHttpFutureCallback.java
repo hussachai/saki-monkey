@@ -9,6 +9,11 @@ import org.apache.http.concurrent.FutureCallback;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jobhive.sexymandrill.data.response.ErrorInfo;
 
+/**
+ * 
+ * @author Hussachai
+ *
+ */
 public class JsonHttpFutureCallback implements FutureCallback<HttpResponse> {
 
     protected ObjectMapper mapper;

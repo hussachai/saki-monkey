@@ -34,6 +34,7 @@ public class Literal {
     /** Returns a new List instance containing the supplied elements. */
     @SafeVarargs
     public static <T> List<T> list(T... elements) {
+        if(elements == null) return null;
         List<T> list = new ArrayList<T>();
         Collections.addAll(list, elements);
         return list;
@@ -42,6 +43,7 @@ public class Literal {
     /** Returns a new Set instance containing the supplied elements. */
     @SafeVarargs
     public static <T> Set<T> set(T... elements) {
+        if(elements == null) return null;
         Set<T> set = new HashSet<T>();
         Collections.addAll(set, elements);
         return set;

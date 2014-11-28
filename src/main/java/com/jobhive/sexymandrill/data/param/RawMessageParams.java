@@ -12,7 +12,7 @@ import com.jobhive.sexymandrill.Defaults;
  * @author Hussachai
  *
  */
-public class RawMessage extends ApiParam{
+public class RawMessageParams extends ApiParam{
 
     private String rawMessage;
     
@@ -36,7 +36,7 @@ public class RawMessage extends ApiParam{
         return rawMessage;
     }
 
-    public RawMessage setRawMessage(String rawMessage) {
+    public RawMessageParams setRawMessage(String rawMessage) {
         this.rawMessage = rawMessage;
         return this;
     }
@@ -45,7 +45,7 @@ public class RawMessage extends ApiParam{
         return fromEmail;
     }
 
-    public RawMessage setFromEmail(String fromEmail) {
+    public RawMessageParams setFromEmail(String fromEmail) {
         this.fromEmail = fromEmail;
         return this;
     }
@@ -54,7 +54,7 @@ public class RawMessage extends ApiParam{
         return fromName;
     }
 
-    public RawMessage setFromName(String fromName) {
+    public RawMessageParams setFromName(String fromName) {
         this.fromName = fromName;
         return this;
     }
@@ -63,7 +63,7 @@ public class RawMessage extends ApiParam{
         return recipients;
     }
 
-    public RawMessage setRecipients(Set<String> recipients) {
+    public RawMessageParams setRecipients(Set<String> recipients) {
         this.recipients = recipients;
         return this;
     }
@@ -72,7 +72,7 @@ public class RawMessage extends ApiParam{
         return async;
     }
 
-    public RawMessage setAsync(Boolean async) {
+    public RawMessageParams setAsync(Boolean async) {
         this.async = async;
         return this;
     }
@@ -81,7 +81,7 @@ public class RawMessage extends ApiParam{
         return ipPool;
     }
 
-    public RawMessage setIpPool(String ipPool) {
+    public RawMessageParams setIpPool(String ipPool) {
         this.ipPool = ipPool;
         return this;
     }
@@ -90,7 +90,7 @@ public class RawMessage extends ApiParam{
         return sendAt;
     }
 
-    public RawMessage setSendAt(Date sendAt) {
+    public RawMessageParams setSendAt(Date sendAt) {
         this.sendAt = sendAt;
         return this;
     }
@@ -99,7 +99,7 @@ public class RawMessage extends ApiParam{
         return returnPathDomain;
     }
 
-    public RawMessage setReturnPathDomain(String returnPathDomain) {
+    public RawMessageParams setReturnPathDomain(String returnPathDomain) {
         this.returnPathDomain = returnPathDomain;
         return this;
     }

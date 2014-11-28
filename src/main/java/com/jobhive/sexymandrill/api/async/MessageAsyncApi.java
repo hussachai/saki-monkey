@@ -12,8 +12,8 @@ import com.jobhive.sexymandrill.MandrillAsyncClient;
 import com.jobhive.sexymandrill.api.async.callback.ObjectResponseCallback;
 import com.jobhive.sexymandrill.data.Message;
 import com.jobhive.sexymandrill.data.TemplateContent;
-import com.jobhive.sexymandrill.data.param.MessageSearchCriteria;
-import com.jobhive.sexymandrill.data.param.RawMessage;
+import com.jobhive.sexymandrill.data.param.MessageSearchParams;
+import com.jobhive.sexymandrill.data.param.RawMessageParams;
 import com.jobhive.sexymandrill.data.response.MessageContent;
 import com.jobhive.sexymandrill.data.response.MessageInfo;
 import com.jobhive.sexymandrill.data.response.MessageStatus;
@@ -52,8 +52,9 @@ public class MessageAsyncApi extends MandrillAsyncApi {
             Boolean async, String ipPool, Date sendAt,
             ObjectResponseCallback<MessageStatus[]> callback) {
         /* TemplateContent is required field even we don't need it */
-        templateContents = (templateContents == null) ? Literal
-                .list(new TemplateContent("N", "O")) : templateContents;
+        if(templateContents == null){
+            templateContents = Literal.list(new TemplateContent("N", "O"));
+        }
         Map<String, Object> params = mapParams("template_name", templateName)
                 .p("template_content", templateContents).p("message", message)
                 .p("async", async).p("ip_pool", ipPool)
@@ -67,13 +68,13 @@ public class MessageAsyncApi extends MandrillAsyncApi {
         return sendTemplate(templateName, null, message, null, null, null, callback);
     }
     
-    public Future<HttpResponse> search(MessageSearchCriteria searchCriteria,
+    public Future<HttpResponse> search(MessageSearchParams searchCriteria,
             ObjectResponseCallback<MessageStatus[]> callback) {
         return getClient().execute("/messages/search.json", searchCriteria, callback);
     }
     
     public Future<HttpResponse> searchTimeSeries(
-            MessageSearchCriteria searchCriteria,
+            MessageSearchParams searchCriteria,
             ObjectResponseCallback<TimedSummaryInfo[]> callback) {
         return getClient().execute("/messages/search-time-series.json", searchCriteria,
                 callback);
@@ -97,7 +98,7 @@ public class MessageAsyncApi extends MandrillAsyncApi {
                 mapParams("raw_message", rawMessage), callback);
     }
 
-    public Future<HttpResponse> sendRaw(RawMessage rawMessage,
+    public Future<HttpResponse> sendRaw(RawMessageParams rawMessage,
             ObjectResponseCallback<MessageStatus[]> callback) {
         return getClient().execute("/messages/send-raw.json", rawMessage, callback);
     }

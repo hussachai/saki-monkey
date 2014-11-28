@@ -12,7 +12,7 @@ import com.jobhive.sexymandrill.Defaults;
  * @author Hussachai
  *
  */
-public class MessageSearchCriteria extends ApiParam  {
+public class MessageSearchParams extends ApiParam  {
     
     /**
      * search terms to find matching messages
@@ -60,7 +60,7 @@ public class MessageSearchCriteria extends ApiParam  {
         return query;
     }
 
-    public MessageSearchCriteria setQuery(String query) {
+    public MessageSearchParams setQuery(String query) {
         this.query = query;
         return this;
     }
@@ -69,7 +69,7 @@ public class MessageSearchCriteria extends ApiParam  {
         return dateFrom;
     }
 
-    public MessageSearchCriteria setDateFrom(Date dateFrom) {
+    public MessageSearchParams setDateFrom(Date dateFrom) {
         this.dateFrom = dateFrom;
         return this;
     }
@@ -78,7 +78,7 @@ public class MessageSearchCriteria extends ApiParam  {
         return dateTo;
     }
 
-    public MessageSearchCriteria setDateTo(Date dateTo) {
+    public MessageSearchParams setDateTo(Date dateTo) {
         this.dateTo = dateTo;
         return this;
     }
@@ -87,12 +87,12 @@ public class MessageSearchCriteria extends ApiParam  {
         return tags;
     }
 
-    public MessageSearchCriteria setTags(Set<String> tags) {
+    public MessageSearchParams setTags(Set<String> tags) {
         this.tags = tags;
         return this;
     }
 
-    public MessageSearchCriteria setTags(String... tags) {
+    public MessageSearchParams setTags(String... tags) {
         if (tags != null) {
             this.tags = new HashSet<String>();
             for (String tag : tags) {
@@ -106,12 +106,12 @@ public class MessageSearchCriteria extends ApiParam  {
         return senders;
     }
 
-    public MessageSearchCriteria setSenders(Set<String> senders) {
+    public MessageSearchParams setSenders(Set<String> senders) {
         this.senders = senders;
         return this;
     }
 
-    public MessageSearchCriteria setSenders(String... senders) {
+    public MessageSearchParams setSenders(String... senders) {
         if (senders != null) {
             this.senders = new HashSet<String>();
             for (String sender : senders) {
@@ -125,12 +125,12 @@ public class MessageSearchCriteria extends ApiParam  {
         return apiKeys;
     }
 
-    public MessageSearchCriteria setApiKeys(Set<String> apiKeys) {
+    public MessageSearchParams setApiKeys(Set<String> apiKeys) {
         this.apiKeys = apiKeys;
         return this;
     }
 
-    public MessageSearchCriteria setApiKeys(String... apiKeys) {
+    public MessageSearchParams setApiKeys(String... apiKeys) {
         if (apiKeys != null) {
             this.apiKeys = new HashSet<String>();
             for (String apiKey : apiKeys) {
@@ -144,7 +144,7 @@ public class MessageSearchCriteria extends ApiParam  {
         return limit;
     }
 
-    public MessageSearchCriteria setLimit(int limit) {
+    public MessageSearchParams setLimit(int limit) {
         this.limit = limit;
         return this;
     }
