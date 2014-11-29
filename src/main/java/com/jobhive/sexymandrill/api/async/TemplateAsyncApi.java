@@ -34,7 +34,7 @@ public class TemplateAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> add(TemplateParams params,
             ObjectResponseCallback<Template> callback) {
-        return getClient().execute("/templates/add.json", params, callback);
+        return getClient().execute(TEMPLATE_ADD, params, callback);
     }
     
     /**
@@ -45,7 +45,7 @@ public class TemplateAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> info(String name,
             ObjectResponseCallback<Template> callback) {
-        return getClient().execute("/templates/info.json", 
+        return getClient().execute(TEMPLATE_INFO, 
                 mapParams("name", name), callback);
     }
     
@@ -58,8 +58,7 @@ public class TemplateAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> update(TemplateParams params,
             ObjectResponseCallback<Template> callback) {
-        return getClient().execute("/templates/update.json", 
-                params, callback);
+        return getClient().execute(TEMPLATE_UPDATE, params, callback);
     }
     
     /**
@@ -71,7 +70,7 @@ public class TemplateAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> publish(String name,
             ObjectResponseCallback<Template> callback) {
-        return getClient().execute("/templates/publish.json", 
+        return getClient().execute(TEMPLATE_PUBLISH, 
                 mapParams("name", name), callback);
     }
     
@@ -83,7 +82,7 @@ public class TemplateAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> delete(String name,
             ObjectResponseCallback<Template> callback) {
-        return getClient().execute("/templates/delete.json", 
+        return getClient().execute(TEMPLATE_DELETE, 
                 mapParams("name", name), callback);
     }
     
@@ -95,7 +94,7 @@ public class TemplateAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> list(String label,
             ObjectResponseCallback<Template[]> callback) {
-        return getClient().execute("/templates/list.json", 
+        return getClient().execute(TEMPLATE_LIST, 
                 mapParams("label", label), callback);
     }
     
@@ -105,7 +104,7 @@ public class TemplateAsyncApi extends MandrillAsyncApi {
      * @return
      */
     public Future<HttpResponse> list(ObjectResponseCallback<Template[]> callback) {
-        return getClient().execute("/templates/list.json", null , callback);
+        return list(null, callback);
     }
     
     /**
@@ -116,7 +115,7 @@ public class TemplateAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> timeSeries(String name,
             ObjectResponseCallback<Template[]> callback) {
-        return getClient().execute("/templates/time-series.json", 
+        return getClient().execute(TEMPLATE_TIME_SERIES, 
                 mapParams("name", name), callback);
     }
     
@@ -142,7 +141,7 @@ public class TemplateAsyncApi extends MandrillAsyncApi {
         Map<String, Object> params = mapParams("template_name", name)
                 .p("template_content", templateContents)
                 .p("merge_vars", mergeVars);
-        return getClient().execute("/templates/render.json", params, callback);
+        return getClient().execute(TEMPLATE_RENDER, params, callback);
     }
     
     /**

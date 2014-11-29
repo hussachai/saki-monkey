@@ -26,8 +26,9 @@ public class UrlAsyncApi extends MandrillAsyncApi {
      * @param callback (the 100 most clicked URLs and their stats)
      * @return
      */
-    public Future<HttpResponse> list(ObjectResponseCallback<UrlInfo[]> callback) {
-        return getClient().execute("/urls/list.json", null, callback);
+    public Future<HttpResponse> list(
+            ObjectResponseCallback<UrlInfo[]> callback) {
+        return getClient().execute(URL_LIST, null, callback);
     }
     
     /**
@@ -36,8 +37,9 @@ public class UrlAsyncApi extends MandrillAsyncApi {
      * @param callback (the 100 most clicked URLs matching the search query)
      * @return
      */
-    public Future<HttpResponse> search(String q, ObjectResponseCallback<UrlInfo[]> callback) {
-        return getClient().execute("/urls/search.json", mapParams("q", q), callback);
+    public Future<HttpResponse> search(String q, 
+            ObjectResponseCallback<UrlInfo[]> callback) {
+        return getClient().execute(URL_SEARCH, mapParams("q", q), callback);
     }
     
     /**
@@ -46,8 +48,10 @@ public class UrlAsyncApi extends MandrillAsyncApi {
      * @param callback (the array of history information)
      * @return
      */
-    public Future<HttpResponse> timeSeries(String url, ObjectResponseCallback<TimedUrlInfo[]> callback) {
-        return getClient().execute("/urls/time-series.json", mapParams("url", url), callback);
+    public Future<HttpResponse> timeSeries(String url, 
+            ObjectResponseCallback<TimedUrlInfo[]> callback) {
+        return getClient().execute(URL_TIME_SERIES, 
+                mapParams("url", url), callback);
     }
     
     /**
@@ -55,8 +59,9 @@ public class UrlAsyncApi extends MandrillAsyncApi {
      * @param callback (the tracking domains and their status)
      * @return
      */
-    public Future<HttpResponse> trackingDomains(ObjectResponseCallback<TrackingDomain[]> callback) {
-        return getClient().execute("/urls/tracking-domains.json", null, callback);
+    public Future<HttpResponse> trackingDomains(
+            ObjectResponseCallback<TrackingDomain[]> callback) {
+        return getClient().execute(URL_TRACKING_DOMAINS, null, callback);
     }
     
     /**
@@ -67,7 +72,8 @@ public class UrlAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> addTrackingDomain(String domain, 
             ObjectResponseCallback<TrackingDomain> callback) {
-        return getClient().execute("/urls/add-tracking-domain.json", mapParams("domain", domain), callback);
+        return getClient().execute(URL_ADD_TRACKING_DOMAIN, 
+                mapParams("domain", domain), callback);
     }
     
     /**
@@ -79,6 +85,7 @@ public class UrlAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> checkTrackingDomain(String domain, 
             ObjectResponseCallback<TrackingDomain> callback) {
-        return getClient().execute("/urls/check-tracking-domain.json", mapParams("domain", domain), callback);
+        return getClient().execute(URL_CHECK_TRACKING_DOMAIN, 
+                mapParams("domain", domain), callback);
     }
 }

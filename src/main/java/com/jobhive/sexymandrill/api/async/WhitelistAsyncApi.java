@@ -1,5 +1,6 @@
 package com.jobhive.sexymandrill.api.async;
 
+import java.util.Map;
 import java.util.concurrent.Future;
 
 import org.apache.http.HttpResponse;
@@ -31,8 +32,8 @@ public class WhitelistAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> add(String email, String comment,
             ObjectResponseCallback<EmailStatus.AddedStatus> callback) {
-        return getClient().execute("/whitelists/add.json", 
-                mapParams("email", email).p("comment", comment), callback);
+        Map<String, Object> params = mapParams("email", email).p("comment", comment);
+        return getClient().execute(WHITELIST_ADD, params, callback);
     }
     
     /**
@@ -54,7 +55,7 @@ public class WhitelistAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> list(String email, 
             ObjectResponseCallback<WhitelistEntry[]> callback) {
-        return getClient().execute("/whitelists/list.json", 
+        return getClient().execute(WHITELIST_LIST, 
                 mapParams("email", email), callback);
     }
     
@@ -75,7 +76,7 @@ public class WhitelistAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> delete(String email, 
             ObjectResponseCallback<EmailStatus.DeletedStatus> callback) {
-        return getClient().execute("/whitelists/delete.json", 
+        return getClient().execute(WHITELIST_DELETE, 
                 mapParams("email", email), callback);
     }
 }

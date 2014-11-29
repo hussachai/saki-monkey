@@ -29,7 +29,7 @@ public class SubaccountAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> list(String q,
             ObjectResponseCallback<Subaccount[]> callback) {
-        return getClient().execute("/subaccounts/list.json", mapParams("q", q), callback);
+        return getClient().execute(SUBACC_LIST, mapParams("q", q), callback);
     }
     
     /**
@@ -39,7 +39,7 @@ public class SubaccountAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> list(
             ObjectResponseCallback<Subaccount[]> callback) {
-        return getClient().execute("/subaccounts/list.json", null, callback);
+        return list(null, callback);
     }
     
     /**
@@ -55,7 +55,7 @@ public class SubaccountAsyncApi extends MandrillAsyncApi {
             ObjectResponseCallback<Subaccount> callback) {
         Map<String, Object> params = mapParams("id", id).p("name", name)
                 .p("notes", note).p("custom_quota", customQuota);
-        return getClient().execute("/subaccounts/add.json", params, callback);
+        return getClient().execute(SUBACC_ADD, params, callback);
     }
     
     /**
@@ -66,7 +66,7 @@ public class SubaccountAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> info(String id,
             ObjectResponseCallback<SubaccountInfo> callback) {
-        return getClient().execute("/subaccounts/info.json", 
+        return getClient().execute(SUBACC_INFO, 
                 mapParams("id", id), callback);
     }
     
@@ -83,7 +83,7 @@ public class SubaccountAsyncApi extends MandrillAsyncApi {
             ObjectResponseCallback<Subaccount> callback) {
         Map<String, Object> params = mapParams("id", id).p("name", name)
                 .p("notes", note).p("custom_quota", customQuota);
-        return getClient().execute("/subaccounts/update.json", params, callback);
+        return getClient().execute(SUBACC_UPDATE, params, callback);
     }
     
     /**
@@ -95,7 +95,7 @@ public class SubaccountAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> delete(String id,
             ObjectResponseCallback<Subaccount> callback) {
-        return getClient().execute("/subaccounts/delete.json", 
+        return getClient().execute(SUBACC_DELETE, 
                 mapParams("id", id), callback);
     }
     
@@ -108,7 +108,7 @@ public class SubaccountAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> pause(String id,
             ObjectResponseCallback<Subaccount> callback) {
-        return getClient().execute("/subaccounts/pause.json", 
+        return getClient().execute(SUBACC_PAUSE, 
                 mapParams("id", id), callback);
     }
     
@@ -120,7 +120,7 @@ public class SubaccountAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> resume(String id,
             ObjectResponseCallback<Subaccount> callback) {
-        return getClient().execute("/subaccounts/resume.json", 
+        return getClient().execute(SUBACC_RESUME, 
                 mapParams("id", id), callback);
     }
 }

@@ -26,7 +26,7 @@ public class UserAsyncApi extends MandrillAsyncApi {
      * @return
      */
     public Future<HttpResponse> info(ObjectResponseCallback<UserInfo> callback) {
-        return getClient().execute("/users/info.json", null, callback);
+        return getClient().execute(USER_INFO, null, callback);
     }
     
     /**
@@ -35,7 +35,7 @@ public class UserAsyncApi extends MandrillAsyncApi {
      * @return
      */
     public Future<HttpResponse> ping(ObjectResponseCallback<String> callback) {
-        return getClient().execute("/users/ping.json", null, callback);
+        return getClient().execute(USER_PING, null, callback);
     }
     
     /**
@@ -45,7 +45,7 @@ public class UserAsyncApi extends MandrillAsyncApi {
      * @return
      */
     public Future<HttpResponse> senders(ObjectResponseCallback<SenderInfo[]> callback) {
-        return getClient().execute("/users/senders.json", null, callback);
+        return getClient().execute(USER_SENDERS, null, callback);
     }
     
 }

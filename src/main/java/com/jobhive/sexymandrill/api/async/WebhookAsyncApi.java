@@ -28,7 +28,7 @@ public class WebhookAsyncApi extends MandrillAsyncApi {
      * @return
      */
     public Future<HttpResponse> list(ObjectResponseCallback<Webhook[]> callback) {
-        return getClient().execute("/webhooks/list.json", null, callback);
+        return getClient().execute(WEBHOOK_LIST, null, callback);
     }
     
     /**
@@ -44,7 +44,7 @@ public class WebhookAsyncApi extends MandrillAsyncApi {
             ObjectResponseCallback<Webhook> callback) {
         Map<String, Object> params = mapParams("url", url)
                 .p("description", description).p("events", events);
-        return getClient().execute("/webhooks/add.json", params, callback);
+        return getClient().execute(WEBHOOK_ADD, params, callback);
     }
     
     /**
@@ -55,7 +55,7 @@ public class WebhookAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> info(Integer id,
             ObjectResponseCallback<Webhook> callback) {
-        return getClient().execute("/webhooks/info.json", 
+        return getClient().execute(WEBHOOK_INFO, 
                 mapParams("id", id), callback);
     }
     
@@ -72,7 +72,7 @@ public class WebhookAsyncApi extends MandrillAsyncApi {
             List<MessageEvent> events, ObjectResponseCallback<Webhook> callback) {
         Map<String, Object> params = mapParams("url", url)
                 .p("description", description).p("events", events);
-        return getClient().execute("/webhooks/update.json", params, callback);
+        return getClient().execute(WEBHOOK_UPDATE, params, callback);
     }
     
     /**
@@ -83,7 +83,7 @@ public class WebhookAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> delete(Integer id,
             ObjectResponseCallback<Webhook> callback) {
-        return getClient().execute("/webhooks/delete.json", 
+        return getClient().execute(WEBHOOK_DELETE, 
                 mapParams("id", id), callback);
     }
 }

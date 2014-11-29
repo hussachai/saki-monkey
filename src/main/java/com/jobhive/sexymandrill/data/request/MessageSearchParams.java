@@ -54,7 +54,7 @@ public class MessageSearchParams extends ApiParam  {
      * the maximum number of results to return, defaults to 100, 1000 is the
      * maximum
      */
-    private int limit;
+    private Integer limit;
     
     public String getQuery() {
         return query;
@@ -140,11 +140,11 @@ public class MessageSearchParams extends ApiParam  {
         return this;
     }
 
-    public int getLimit() {
+    public Integer getLimit() {
         return limit;
     }
 
-    public MessageSearchParams setLimit(int limit) {
+    public MessageSearchParams setLimit(Integer limit) {
         this.limit = limit;
         return this;
     }

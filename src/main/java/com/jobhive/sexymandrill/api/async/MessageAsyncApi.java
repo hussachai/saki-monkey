@@ -61,7 +61,7 @@ public class MessageAsyncApi extends MandrillAsyncApi {
         Map<String, Object> params = mapParams("message", message)
                 .p("async", async).p("ip_pool", ipPool)
                 .p("send_at", Defaults.formatDateTime(sendAt));
-        return getClient().execute("/messages/send.json", params, callback);
+        return getClient().execute(MESSAGE_SEND, params, callback);
     }
 
     /**
@@ -118,7 +118,7 @@ public class MessageAsyncApi extends MandrillAsyncApi {
                 .p("template_content", templateContents).p("message", message)
                 .p("async", async).p("ip_pool", ipPool)
                 .p("send_at", Defaults.formatDateTime(sendAt));
-        return getClient().execute("/messages/send-template.json", 
+        return getClient().execute(MESSAGE_SEND_TEMPLATE, 
                 params, callback);
     }
     
@@ -148,8 +148,7 @@ public class MessageAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> search(MessageSearchParams params,
             ObjectResponseCallback<MessageStatus[]> callback) {
-        return getClient().execute("/messages/search.json", 
-                params, callback);
+        return getClient().execute(MESSAGE_SEARCH, params, callback);
     }
     
     /**
@@ -161,7 +160,7 @@ public class MessageAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> searchTimeSeries(MessageSearchParams params,
             ObjectResponseCallback<TimedStats[]> callback) {
-        return getClient().execute("/messages/search-time-series.json", 
+        return getClient().execute(MESSAGE_SEARCH_TIME_SERIES, 
                 params, callback);
     }
 
@@ -174,8 +173,7 @@ public class MessageAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> info(String id,
             ObjectResponseCallback<MessageInfo> callback) {
-        return getClient().execute("/messages/info.json", 
-                mapParams("id", id), callback);
+        return getClient().execute(MESSAGE_INFO, mapParams("id", id), callback);
     }
     
     /**
@@ -187,8 +185,7 @@ public class MessageAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> content(String id,
             ObjectResponseCallback<MessageContent> callback) {
-        return getClient().execute("/messages/content.json", 
-                mapParams("id", id), callback);
+        return getClient().execute(MESSAGE_CONTENT, mapParams("id", id), callback);
     }
 
     /**
@@ -200,7 +197,7 @@ public class MessageAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> parse(String rawMessage,
             ObjectResponseCallback<ParsedMessageContent> callback) {
-        return getClient().execute("/messages/parse.json", 
+        return getClient().execute(MESSAGE_PARSE, 
                 mapParams("raw_message", rawMessage), callback);
     }
 
@@ -213,7 +210,7 @@ public class MessageAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> sendRaw(MessageSendRawParams rawMessage,
             ObjectResponseCallback<MessageStatus[]> callback) {
-        return getClient().execute("/messages/send-raw.json", rawMessage, callback);
+        return getClient().execute(MESSAGE_SEND_RAW, rawMessage, callback);
     }
     
     /**
@@ -224,7 +221,7 @@ public class MessageAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> listScheduled(String toEmail,
             ObjectResponseCallback<MessageSchedule[]> callback) {
-        return getClient().execute("/messages/list-scheduled.json", 
+        return getClient().execute(MESSAGE_LIST_SCHEDULED, 
                 mapParams("to", toEmail), callback);
     }
     
@@ -246,7 +243,7 @@ public class MessageAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> cancelScheduled(String id,
             ObjectResponseCallback<MessageSchedule> callback) {
-        return getClient().execute("/messages/cancel-scheduled.json", 
+        return getClient().execute(MESSAGE_CANCEL_SCHEDULED, 
                 mapParams("id", id), callback);
     }
     
@@ -264,7 +261,7 @@ public class MessageAsyncApi extends MandrillAsyncApi {
             ObjectResponseCallback<MessageSchedule> callback) {
         Map<String, Object> params = mapParams("id", id)
                 .p("send_at", Defaults.formatDateTime(sendAt));
-        return getClient().execute("/messages/rescheduled.json", 
+        return getClient().execute(MESSAGE_RESCHEDULED, 
                 params, callback);
     }
 }

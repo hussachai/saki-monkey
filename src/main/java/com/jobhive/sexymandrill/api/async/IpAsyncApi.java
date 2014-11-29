@@ -27,8 +27,9 @@ public class IpAsyncApi extends MandrillAsyncApi {
      * @param callback
      * @return
      */
-    public Future<HttpResponse> list(ObjectResponseCallback<DedicatedIp[]> callback) {
-        return getClient().execute("/ips/list.json", null, callback);
+    public Future<HttpResponse> list(
+            ObjectResponseCallback<DedicatedIp[]> callback) {
+        return getClient().execute(IP_LIST, null, callback);
     }
     
     /**
@@ -39,7 +40,7 @@ public class IpAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> info(String ip,
             ObjectResponseCallback<DedicatedIp> callback) {
-        return getClient().execute("/ips/info.json", 
+        return getClient().execute(IP_INFO, 
                 mapParams("ip", ip), callback);
     }
     
@@ -55,7 +56,7 @@ public class IpAsyncApi extends MandrillAsyncApi {
     public Future<HttpResponse> provision(Boolean warmup, String pool,
             ObjectResponseCallback<DedicatedIp> callback) {
         Map<String, Object> params = mapParams("warmup", warmup).p("pool", pool);
-        return getClient().execute("/ips/provision.json", params, callback);
+        return getClient().execute(IP_PROVISION, params, callback);
     }
     
     /**
@@ -69,8 +70,7 @@ public class IpAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> startWarmup(String ip,
             ObjectResponseCallback<DedicatedIp> callback) {
-        return getClient().execute("/ips/start-warmup.json", 
-                mapParams("ip", ip), callback);
+        return getClient().execute(IP_START_WARMUP, mapParams("ip", ip), callback);
     }
     
     /**
@@ -81,8 +81,7 @@ public class IpAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> cancelWarmup(String ip,
             ObjectResponseCallback<DedicatedIp> callback) {
-        return getClient().execute("/ips/cancel-warmup.json", 
-                mapParams("ip", ip), callback);
+        return getClient().execute(IP_CANCEL_WARMUP, mapParams("ip", ip), callback);
     }
     
     /**
@@ -98,7 +97,7 @@ public class IpAsyncApi extends MandrillAsyncApi {
             ObjectResponseCallback<DedicatedIp> callback) {
         Map<String, Object> params = mapParams("ip", ip)
                 .p("pool", pool).p("create_pool", createPool);
-        return getClient().execute("/ips/set-pool.json", params, callback);
+        return getClient().execute(IP_SET_POOL, params, callback);
     }
     
     /**
@@ -109,8 +108,7 @@ public class IpAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> delete(String ip,
             ObjectResponseCallback<DedicatedIp.IpDeleteStatus> callback) {
-        return getClient().execute("/ips/delete.json", 
-                mapParams("ip", ip), callback);
+        return getClient().execute(IP_DELETE, mapParams("ip", ip), callback);
     }
     
     /**
@@ -118,8 +116,9 @@ public class IpAsyncApi extends MandrillAsyncApi {
      * @param callback
      * @return
      */
-    public Future<HttpResponse> listPools(ObjectResponseCallback<DedicatedIpPool[]> callback) {
-        return getClient().execute("/ips/list-pools.json", null, callback);
+    public Future<HttpResponse> listPools(
+            ObjectResponseCallback<DedicatedIpPool[]> callback) {
+        return getClient().execute(IP_LIST_POOLS, null, callback);
     }
     
     /**
@@ -130,8 +129,7 @@ public class IpAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> poolInfo(String pool, 
             ObjectResponseCallback<DedicatedIpPool> callback) {
-        return getClient().execute("/ips/pool-info.json", 
-                mapParams("pool", pool), callback);
+        return getClient().execute(IP_POOL_INFO, mapParams("pool", pool), callback);
     }
     
     /**
@@ -143,7 +141,7 @@ public class IpAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> createPool(String pool, 
             ObjectResponseCallback<DedicatedIpPool> callback) {
-        return getClient().execute("/ips/create-pool.json", 
+        return getClient().execute(IP_CREATE_POOL, 
                 mapParams("pool", pool), callback);
     }
     
@@ -156,8 +154,7 @@ public class IpAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> deletePool(String pool, 
             ObjectResponseCallback<DedicatedIpPool.PoolDeleteStatus> callback) {
-        return getClient().execute("/ips/delete-pool.json", 
-                mapParams("pool", pool), callback);
+        return getClient().execute(IP_SET_POOL, mapParams("pool", pool), callback);
     }
     
     /**
@@ -171,7 +168,7 @@ public class IpAsyncApi extends MandrillAsyncApi {
     public Future<HttpResponse> checkCustomDns(String ip, String domain, 
             ObjectResponseCallback<DedicatedIp.CustomDnsStatus> callback) {
         Map<String, Object> params = mapParams("ip", ip).p("domain", domain);
-        return getClient().execute("/ips/check-custom-dns.json", params, callback);
+        return getClient().execute(IP_CHECK_CUSTOM_DNS, params, callback);
     }
     
     /**
@@ -184,7 +181,7 @@ public class IpAsyncApi extends MandrillAsyncApi {
     public Future<HttpResponse> setCustomDns(String ip, String domain, 
             ObjectResponseCallback<DedicatedIp> callback) {
         Map<String, Object> params = mapParams("ip", ip).p("domain", domain);
-        return getClient().execute("/ips/set-custom-dns.json", params, callback);
+        return getClient().execute(IP_SET_CUSTOM_DNS, params, callback);
     }
     
 }

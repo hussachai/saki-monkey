@@ -32,8 +32,7 @@ public class ExportAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> info(String id, 
             ObjectResponseCallback<ExportJob> callback) {
-        return getClient().execute("/exports/info.json", 
-                mapParams("id", id), callback);
+        return getClient().execute(EXPORT_INFO, mapParams("id", id), callback);
     }
     
     /**
@@ -41,8 +40,9 @@ public class ExportAsyncApi extends MandrillAsyncApi {
      * @param callback
      * @return
      */
-    public Future<HttpResponse> list(ObjectResponseCallback<ExportJob[]> callback) {
-        return getClient().execute("/exports/list.json", null, callback);
+    public Future<HttpResponse> list(
+            ObjectResponseCallback<ExportJob[]> callback) {
+        return getClient().execute(EXPORT_LIST, null, callback);
     }
     
     /**
@@ -56,7 +56,7 @@ public class ExportAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> rejects(String notifyEmail, 
             ObjectResponseCallback<ExportJob> callback) {
-        return getClient().execute("/exports/rejects.json", 
+        return getClient().execute(EXPORT_REJECTS, 
                 mapParams("notify_email", notifyEmail), callback);
     }
     
@@ -79,7 +79,7 @@ public class ExportAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> whitelist(String notifyEmail, 
             ObjectResponseCallback<ExportJob> callback) {
-        return getClient().execute("/exports/whitelist.json", 
+        return getClient().execute(EXPORT_WHITELIST, 
                 mapParams("notify_email", notifyEmail), callback);
     }
     
@@ -106,6 +106,6 @@ public class ExportAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> activity(ExportActivityParams params,
             ObjectResponseCallback<ExportJob> callback) {
-        return getClient().execute("/exports/activity.json", params, callback);
+        return getClient().execute(EXPORT_ACTIVITY, params, callback);
     }
 }

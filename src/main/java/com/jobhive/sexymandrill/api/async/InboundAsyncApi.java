@@ -28,8 +28,9 @@ public class InboundAsyncApi extends MandrillAsyncApi {
      * @param callback
      * @return
      */
-    public Future<HttpResponse> domains(ObjectResponseCallback<InboundDomain[]> callback) {
-        return getClient().execute("/inbound/domains.json", null, callback);
+    public Future<HttpResponse> domains(
+            ObjectResponseCallback<InboundDomain[]> callback) {
+        return getClient().execute(INBOUND_DOMAINS, null, callback);
     }
     
     /**
@@ -40,7 +41,7 @@ public class InboundAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> addDomain(String domain,
             ObjectResponseCallback<InboundDomain> callback) {
-        return getClient().execute("/inbound/add-domain.json", 
+        return getClient().execute(INBOUND_ADD_DOMAIN, 
                 mapParams("domain", domain), callback);
     }
     
@@ -53,7 +54,7 @@ public class InboundAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> checkDomain(String domain,
             ObjectResponseCallback<InboundDomain> callback) {
-        return getClient().execute("/inbound/check-domain.json", 
+        return getClient().execute(INBOUND_CHECK_DOMAIN, 
                 mapParams("domain", domain), callback);
     }
     
@@ -66,7 +67,7 @@ public class InboundAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> deleteDomain(String domain,
             ObjectResponseCallback<InboundDomain> callback) {
-        return getClient().execute("/inbound/delete-domain.json", 
+        return getClient().execute(INBOUND_DELETE_DOMAIN, 
                 mapParams("domain", domain), callback);
     }
     
@@ -78,7 +79,7 @@ public class InboundAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> routes(String domain,
             ObjectResponseCallback<InboundRoute[]> callback) {
-        return getClient().execute("/inbound/routes.json", 
+        return getClient().execute(INBOUND_ROUTES, 
                 mapParams("domain", domain), callback);
     }
     
@@ -104,7 +105,7 @@ public class InboundAsyncApi extends MandrillAsyncApi {
             ObjectResponseCallback<InboundRoute> callback) {
         Map<String, Object> params = mapParams("domain", domain)
                 .p("pattern", pattern).p("url", url);
-        return getClient().execute("/inbound/add-route.json", 
+        return getClient().execute(INBOUND_ADD_ROUTE, 
                 params, callback);
     }
     
@@ -121,8 +122,7 @@ public class InboundAsyncApi extends MandrillAsyncApi {
             ObjectResponseCallback<InboundRoute> callback) {
         Map<String, Object> params = mapParams("id", id)
                 .p("pattern", pattern).p("url", url);
-        return getClient().execute("/inbound/update-route.json", 
-                params, callback);
+        return getClient().execute(INBOUND_UPDATE_ROUTE, params, callback);
     }
     
     /**
@@ -133,7 +133,7 @@ public class InboundAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> deleteRoute(String id,
             ObjectResponseCallback<InboundRoute> callback) {
-        return getClient().execute("/inbound/delete-route.json", 
+        return getClient().execute(INBOUND_DELETE_ROUTE, 
                 mapParams("id", id), callback);
     }
     
@@ -157,7 +157,6 @@ public class InboundAsyncApi extends MandrillAsyncApi {
         Map<String, Object> params = mapParams("raw_message", rawMessage)
                 .p("to", toEmails).p("mail_from", mailFrom)
                 .p("helo", helo).p("client_address", clientAddress);
-        return getClient().execute("/inbound/send-raw.json", 
-                params, callback);
+        return getClient().execute(INBOUND_SEND_RAW, params, callback);
     }
 }

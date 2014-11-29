@@ -25,8 +25,9 @@ public class MetadataAsyncApi extends MandrillAsyncApi {
      * @param callback
      * @return
      */
-    public Future<HttpResponse> list(ObjectResponseCallback<Metadata[]> callback) {
-        return getClient().execute("/metadata/list.json", null, callback);
+    public Future<HttpResponse> list(
+            ObjectResponseCallback<Metadata[]> callback) {
+        return getClient().execute(METADATA_LIST, null, callback);
     }
     
     /**
@@ -39,8 +40,9 @@ public class MetadataAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> add(String name, String viewTemplate,
         ObjectResponseCallback<Metadata> callback) {
-        Map<String, Object> params = mapParams("name", name).p("view_template", viewTemplate);
-        return getClient().execute("/metadata/add.json", params, callback);
+        Map<String, Object> params = mapParams("name", name)
+                .p("view_template", viewTemplate);
+        return getClient().execute(METADATA_ADD, params, callback);
     }
     
     /**
@@ -53,8 +55,9 @@ public class MetadataAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> update(String name, String viewTemplate,
             ObjectResponseCallback<Metadata> callback) {
-        Map<String, Object> params = mapParams("name", name).p("view_template", viewTemplate);
-        return getClient().execute("/metadata/update.json", params, callback);
+        Map<String, Object> params = mapParams("name", name)
+                .p("view_template", viewTemplate);
+        return getClient().execute(METADATA_UPDATE, params, callback);
     }
     
     /**
@@ -67,7 +70,7 @@ public class MetadataAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> delete(String name,
             ObjectResponseCallback<Metadata> callback) {
-        return getClient().execute("/metadata/delete.json", 
+        return getClient().execute(METADATA_DELETE, 
                 mapParams("name", name), callback);
     }
 }

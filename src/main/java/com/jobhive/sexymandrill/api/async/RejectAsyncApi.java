@@ -37,7 +37,7 @@ public class RejectAsyncApi extends MandrillAsyncApi {
             ObjectResponseCallback<EmailStatus.AddedStatus> callback) {
         Map<String, Object> params = mapParams("email", email)
                 .p("comment", comment).p("subaccount", subaccount);
-        return getClient().execute("/rejects/add.json", params, callback);
+        return getClient().execute(REJECT_ADD, params, callback);
     }
     
     /**
@@ -66,7 +66,7 @@ public class RejectAsyncApi extends MandrillAsyncApi {
             ObjectResponseCallback<RejectEntry[]> callback) {
         Map<String, Object> params = mapParams("email", email)
                 .p("include_expired", includExpired).p("subaccount", subaccount);
-        return getClient().execute("/rejects/list.json", params, callback);
+        return getClient().execute(REJECT_LIST, params, callback);
     }
     
     /**
@@ -91,7 +91,7 @@ public class RejectAsyncApi extends MandrillAsyncApi {
             ObjectResponseCallback<RejectEntry[]> callback) {
         Map<String, Object> params = mapParams("email", email)
                 .p("subaccount", subaccount);
-        return getClient().execute("/rejects/list.json", params, callback);
+        return getClient().execute(REJECT_DELETE, params, callback);
     }
     
     /**

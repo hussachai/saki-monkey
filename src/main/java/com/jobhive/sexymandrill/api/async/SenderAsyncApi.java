@@ -1,5 +1,6 @@
 package com.jobhive.sexymandrill.api.async;
 
+import java.util.Map;
 import java.util.concurrent.Future;
 
 import org.apache.http.HttpResponse;
@@ -27,7 +28,7 @@ public class SenderAsyncApi extends MandrillAsyncApi {
      * @return
      */
     public Future<HttpResponse> list(ObjectResponseCallback<SenderInfo[]> callback) {
-        return getClient().execute("/senders/list.json", null, callback);
+        return getClient().execute(SENDER_LIST, null, callback);
     }
     
     /**
@@ -36,7 +37,7 @@ public class SenderAsyncApi extends MandrillAsyncApi {
      * @return 
      */
     public Future<HttpResponse> domains(ObjectResponseCallback<Domain[]> callback) {
-        return getClient().execute("/senders/domains.json", null, callback);
+        return getClient().execute(SENDER_DOMAINS, null, callback);
     }
     
     /**
@@ -48,7 +49,7 @@ public class SenderAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> addDomain(String domain, 
             ObjectResponseCallback<Domain> callback) {
-        return getClient().execute("/senders/add-domain.json", 
+        return getClient().execute(SENDER_ADD_DOMAIN, 
                 mapParams("domain", domain), callback);
     }
     
@@ -62,7 +63,7 @@ public class SenderAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> checkDomain(String domain, 
             ObjectResponseCallback<Domain> callback) {
-        return getClient().execute("/senders/check-domain.json", 
+        return getClient().execute(SENDER_CHECK_DOMAIN, 
                 mapParams("domain", domain), callback);
     }
     
@@ -81,8 +82,8 @@ public class SenderAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> verifyDomain(String domain, String mailbox, 
             ObjectResponseCallback<Domain> callback) {
-        return getClient().execute("/senders/verify-domain.json", 
-                mapParams("domain", domain).put("mailbox", mailbox), callback);
+        Map<String, Object> params = mapParams("domain", domain).p("mailbox", mailbox);
+        return getClient().execute(SENDER_VERIFY_DOMAIN, params, callback);
     }
     
     /**
@@ -94,7 +95,7 @@ public class SenderAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> info(String address, 
             ObjectResponseCallback<SenderInfo> callback) {
-        return getClient().execute("/senders/info.json", 
+        return getClient().execute(SENDER_INFO, 
                 mapParams("address", address), callback);
     }
     
@@ -106,7 +107,7 @@ public class SenderAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> timeSerieis(String address, 
             ObjectResponseCallback<TimedStats[]> callback) {
-        return getClient().execute("/senders/time-series.json", 
+        return getClient().execute(SENDER_TIME_SERIES, 
                 mapParams("address", address), callback);
     }
 }

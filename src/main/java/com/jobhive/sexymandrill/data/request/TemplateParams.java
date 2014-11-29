@@ -1,6 +1,6 @@
 package com.jobhive.sexymandrill.data.request;
 
-import java.util.List;
+import java.util.Set;
 
 import com.jobhive.sexymandrill.utils.Literal;
 
@@ -49,7 +49,7 @@ public class TemplateParams extends ApiParam {
     /**
      * an optional array of up to 10 labels to use for filtering templates
      */
-    private List<String> labels;
+    private Set<String> labels;
 
     public String getName() {
         return name;
@@ -114,17 +114,17 @@ public class TemplateParams extends ApiParam {
         return this;
     }
 
-    public List<String> getLabels() {
+    public Set<String> getLabels() {
         return labels;
     }
 
-    public TemplateParams setLabels(List<String> labels) {
+    public TemplateParams setLabels(Set<String> labels) {
         this.labels = labels;
         return this;
     }
     
     public TemplateParams setLabels(String... labels) {
-        this.labels = Literal.list(labels);
+        this.labels = Literal.set(labels);
         return this;
     }
     

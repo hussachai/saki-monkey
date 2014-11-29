@@ -27,7 +27,7 @@ public class TagAsyncApi extends MandrillAsyncApi {
      * @return
      */
     public Future<HttpResponse> list(ObjectResponseCallback<TagInfo[]> callback) {
-        return getClient().execute("/tags/list.json", null, callback);
+        return getClient().execute(TAG_LIST, null, callback);
     }
     
     /**
@@ -41,8 +41,7 @@ public class TagAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> delete(String tag, 
             ObjectResponseCallback<TagInfo> callback) {
-        return getClient().execute("/tags/delete.json", 
-                mapParams("tag", tag), callback);
+        return getClient().execute(TAG_DELETE, mapParams("tag", tag), callback);
     }
     
     /**
@@ -54,8 +53,7 @@ public class TagAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> info(String tag, 
             ObjectResponseCallback<TagInfoStats> callback) {
-        return getClient().execute("/tags/info.json", 
-                mapParams("tag", tag), callback);
+        return getClient().execute(TAG_INFO, mapParams("tag", tag), callback);
     }
     
     /**
@@ -66,8 +64,7 @@ public class TagAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> timeSeries(String tag, 
             ObjectResponseCallback<TimedStats[]> callback) {
-        return getClient().execute("/tags/time-series.json", 
-                mapParams("tag", tag), callback);
+        return getClient().execute(TAG_TIME_SERIES, mapParams("tag", tag), callback);
     }
     
     /**
@@ -77,7 +74,7 @@ public class TagAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> allTimeSeries(
             ObjectResponseCallback<TimedStats[]> callback) {
-        return getClient().execute("/tags/all-time-series.json", null, callback);
+        return getClient().execute(TAG_ALL_TIME_SERIES, null, callback);
     }
     
 }
