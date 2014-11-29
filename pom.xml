@@ -1,9 +1,27 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.jobhive.sexy-mandrill</groupId>
-    <artifactId>sexy-mandrill</artifactId>
+    <groupId>com.jobhive.saki-monkey</groupId>
+    <artifactId>saki-monkey</artifactId>
     <version>1.0.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+    <name>SakiMonkey</name>
+    <description>Asynchronous Mandrill Restful API Client for Java</description>
+    <url>https://github.com/JobHive/saki-monkey</url>
+    <inceptionYear>2014</inceptionYear>
+
+    <organization>
+        <name>JobHive, Inc.</name>
+        <url>http://www.jobhive.com</url>
+    </organization>
+
+    <licenses>
+        <license>
+            <name>Apache License</name>
+            <url>http://www.apache.org/licenses/</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
 
     <developers>
         <developer>
@@ -54,6 +72,7 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
             <version>${slf4j.version}</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
@@ -68,7 +87,39 @@
                     <target>${java.version}</target>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>1.9.1</version>
+                <executions>
+                    <execution>
+                        <id>parse-version</id>
+                        <goals>
+                            <goal>parse-version</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.5</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>false</addClasspath>
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                        </manifest>
+                        <manifestEntries>
+                            <Description>${project.description}</Description>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
         </plugins>
+
     </build>
 
 </project>
