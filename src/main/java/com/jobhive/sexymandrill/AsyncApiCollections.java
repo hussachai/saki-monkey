@@ -4,6 +4,7 @@ import com.jobhive.sexymandrill.api.async.ExportAsyncApi;
 import com.jobhive.sexymandrill.api.async.InboundAsyncApi;
 import com.jobhive.sexymandrill.api.async.IpAsyncApi;
 import com.jobhive.sexymandrill.api.async.MessageAsyncApi;
+import com.jobhive.sexymandrill.api.async.MetadataAsyncApi;
 import com.jobhive.sexymandrill.api.async.RejectAsyncApi;
 import com.jobhive.sexymandrill.api.async.SenderAsyncApi;
 import com.jobhive.sexymandrill.api.async.SubaccountAsyncApi;
@@ -47,6 +48,8 @@ public class AsyncApiCollections {
     
     private IpAsyncApi ipApi;
     
+    private MetadataAsyncApi metadataApi;
+    
     public AsyncApiCollections(MandrillAsyncClient client) {
         userApi = new UserAsyncApi(client);
         messageApi = new MessageAsyncApi(client);
@@ -61,6 +64,7 @@ public class AsyncApiCollections {
         inboundApi = new InboundAsyncApi(client);
         exportApi = new ExportAsyncApi(client);
         ipApi = new IpAsyncApi(client);
+        metadataApi = new MetadataAsyncApi(client);
     }
     
     public UserAsyncApi users() {
@@ -113,5 +117,9 @@ public class AsyncApiCollections {
     
     public IpAsyncApi ips(){
         return ipApi;
+    }
+    
+    public MetadataAsyncApi metadata(){
+        return metadataApi;
     }
 }
