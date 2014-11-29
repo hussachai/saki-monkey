@@ -27,10 +27,10 @@ public class JsonHttpFutureCallback implements FutureCallback<HttpResponse> {
     }
     
     @Override
-    public void completed(HttpResponse result) {
-        try (InputStream in = result.getEntity().getContent()) {
+    public void completed(HttpResponse response) {
+        try (InputStream in = response.getEntity().getContent()) {
             Object object = null;
-            if (result.getStatusLine().getStatusCode() == 200) {
+            if (response.getStatusLine().getStatusCode() == 200) {
                 Class<?> objectType = callback.getObjectType();
                 object = readObject(in, objectType);
                 callback.completed(object, false);

@@ -41,10 +41,21 @@ public class MandrillAsyncClient extends AbstractMandrillClient{
         super(apiKey, configPath);
     }
     
+    /**
+     * 
+     * @return
+     */
     public AsyncApiCollections api() {
         return apiCollections;
     }
     
+    /**
+     * 
+     * @param path
+     * @param params
+     * @param futureCallback
+     * @return
+     */
     public Future<HttpResponse> execute(String path, Object params,
             FutureCallback<HttpResponse> futureCallback) {
         HttpPost post = new HttpPost(getContext().getApiUrl(path));
@@ -56,6 +67,13 @@ public class MandrillAsyncClient extends AbstractMandrillClient{
         return future;
     }
 
+    /**
+     * 
+     * @param path
+     * @param params
+     * @param callback
+     * @return
+     */
     public Future<HttpResponse> execute(String path, Object params,
             ObjectResponseCallback<?> callback) {
         return execute(path, params, new JsonHttpFutureCallback(
@@ -76,16 +94,6 @@ public class MandrillAsyncClient extends AbstractMandrillClient{
         } catch (IOException e) {
             log.error(e.getMessage(), e);
         }
-    }
-    
-    /**
-     * 
-     * @return
-     */
-    protected SchemeIOSessionStrategy createSchemeIOSessionStrategy(){
-        
-        return new SSLIOSessionStrategy(
-                SSLContexts.createDefault(), createHostnameVerifier());
     }
     
     /**
@@ -114,4 +122,13 @@ public class MandrillAsyncClient extends AbstractMandrillClient{
         return clientBuilder.build();
     }
     
+    /**
+     * 
+     * @return
+     */
+    protected SchemeIOSessionStrategy createSchemeIOSessionStrategy(){
+        
+        return new SSLIOSessionStrategy(
+                SSLContexts.createDefault(), createHostnameVerifier());
+    }
 }
