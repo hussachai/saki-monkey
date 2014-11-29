@@ -3,14 +3,18 @@ package com.jobhive.sexymandrill;
 import java.io.IOException;
 import java.util.concurrent.Future;
 
+import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
+import org.apache.http.client.CredentialsProvider;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.concurrent.FutureCallback;
 import org.apache.http.conn.ssl.DefaultHostnameVerifier;
 import org.apache.http.conn.ssl.SSLContexts;
 import org.apache.http.entity.ContentType;
 import org.apache.http.impl.nio.client.CloseableHttpAsyncClient;
+import org.apache.http.impl.nio.client.HttpAsyncClientBuilder;
 import org.apache.http.impl.nio.client.HttpAsyncClients;
+import org.apache.http.nio.conn.SchemeIOSessionStrategy;
 import org.apache.http.nio.conn.ssl.SSLIOSessionStrategy;
 import org.apache.http.nio.entity.NStringEntity;
 
@@ -75,12 +79,32 @@ public class MandrillAsyncClient extends AbstractMandrillClient{
         }
     }
     
-    protected CloseableHttpAsyncClient createHttpAsyncClient() {
-
-        SSLIOSessionStrategy sslSessionStrategy = new SSLIOSessionStrategy(
+    protected SchemeIOSessionStrategy createSchemeIOSessionStrategy(){
+        return new SSLIOSessionStrategy(
                 SSLContexts.createDefault(), new DefaultHostnameVerifier());
-        return HttpAsyncClients.custom().setSSLStrategy(sslSessionStrategy)
-                .build();
+    }
+    
+    /**
+     * Factory method for Apache HttpAsyncClient
+     * @return
+     */
+    protected CloseableHttpAsyncClient createHttpAsyncClient() {
+        
+        HttpAsyncClientBuilder clientBuilder = HttpAsyncClients.custom();
+        clientBuilder.setSSLStrategy(createSchemeIOSessionStrategy());
+        HttpHost proxy = detectHttpProxy();
+        if(proxy != null){
+            
+            clientBuilder.setProxy(proxy);
+            
+            CredentialsProvider credsProvider = createDefaultCredentialsProvider(
+                    proxy.getHostName(), proxy.getPort());
+            if(credsProvider != null){
+                clientBuilder.setDefaultCredentialsProvider(credsProvider);
+            }
+        }
+        clientBuilder.setDefaultRequestConfig(createDefaultRequestConfig());
+        return clientBuilder.build();
     }
     
 }
