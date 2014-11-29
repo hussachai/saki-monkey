@@ -1,10 +1,12 @@
 package com.jobhive.sexymandrill.data.request;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.jobhive.sexymandrill.Defaults;
+import com.jobhive.sexymandrill.utils.Literal;
 
 /**
  * 
@@ -41,12 +43,14 @@ public class ExportActivityParams {
     private Set<String> senders;
     
     /**
-     * an array of states to narrow the export to; messages with ANY of the states will be included
+     * an array of states to narrow the export to; messages with 
+     * ANY of the states will be included
      */
     private Set<MessageState> states;
     
     /**
-     * an array of api keys to narrow the export to; messsagse sent with ANY of the keys will be included
+     * an array of api keys to narrow the export to; messsagse sent with 
+     * ANY of the keys will be included
      */
     private Set<String> apiKeys;
 
@@ -85,7 +89,12 @@ public class ExportActivityParams {
         this.tags = tags;
         return this;
     }
-
+    
+    public ExportActivityParams setTags(String... tags){
+        this.tags = Literal.set(tags);
+        return this;
+    }
+    
     public Set<String> getSenders() {
         return senders;
     }
@@ -95,6 +104,11 @@ public class ExportActivityParams {
         return this;
     }
 
+    public ExportActivityParams setSenders(String... senders){
+        this.senders = Literal.set(senders);
+        return this;
+    }
+    
     public Set<MessageState> getStates() {
         return states;
     }
@@ -103,13 +117,26 @@ public class ExportActivityParams {
         this.states = states;
         return this;
     }
-
+    
+    public ExportActivityParams addState(MessageState state){
+        if(this.states == null){
+            this.states = new HashSet<>();
+        }
+        this.states.add(state);
+        return this;
+    }
+    
     public Set<String> getApiKeys() {
         return apiKeys;
     }
 
     public ExportActivityParams setApiKeys(Set<String> apiKeys) {
         this.apiKeys = apiKeys;
+        return this;
+    }
+    
+    public ExportActivityParams setApiKeys(String... apiKeys) {
+        this.apiKeys = Literal.set(apiKeys);
         return this;
     }
     
@@ -131,7 +158,7 @@ public class ExportActivityParams {
         
         private String value;
 
-        MessageState(String value) {
+        private MessageState(String value) {
             this.value = value;
         }
         

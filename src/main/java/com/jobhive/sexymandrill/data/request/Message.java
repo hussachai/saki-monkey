@@ -1,7 +1,6 @@
 package com.jobhive.sexymandrill.data.request;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -465,12 +464,7 @@ public class Message {
     }
 
     public Message setTags(String... tags) {
-        if (tags != null) {
-            this.tags = new HashSet<String>();
-            for (String tag : tags) {
-                this.tags.add(tag);
-            }
-        }
+        this.tags = Literal.set(tags);
         return this;
     }
 
@@ -752,7 +746,8 @@ public class Message {
          * the per-recipient metadata and the global metadata, the per-recipient
          * metadata will be used.
          */
-        private Map<String, String> values;
+        @JsonProperty("values")
+        private Map<String, String> metadata;
         
         @Override
         public int hashCode() {
@@ -783,18 +778,28 @@ public class Message {
             return rcpt;
         }
 
-        public void setRcpt(String rcpt) {
+        public RecipientMetaData setRcpt(String rcpt) {
             this.rcpt = rcpt;
+            return this;
         }
 
-        public Map<String, String> getValues() {
-            return values;
+        public Map<String, String> getMetadata() {
+            return metadata;
         }
 
-        public void setValues(Map<String, String> values) {
-            this.values = values;
+        public RecipientMetaData setMetadata(Map<String, String> metadata) {
+            this.metadata = metadata;
+            return this;
         }
 
+        public RecipientMetaData addMetadata(String name, String value) {
+            Assert.notNull(name, "name");
+            if (this.metadata == null) {
+                this.metadata = new HashMap<>();
+            }
+            this.metadata.put(name, value);
+            return this;
+        }
     }
 
     /**
@@ -849,16 +854,18 @@ public class Message {
             return name;
         }
 
-        public void setName(String name) {
+        public Var setName(String name) {
             this.name = name;
+            return this;
         }
 
         public Object getContent() {
             return content;
         }
 
-        public void setContent(Object content) {
+        public Var setContent(Object content) {
             this.content = content;
+            return this;
         }
 
     }
@@ -919,22 +926,20 @@ public class Message {
             return rcpt;
         }
 
-        public void setRcpt(String rcpt) {
+        public RecipientVars setRcpt(String rcpt) {
             Assert.notNull(rcpt, "rcpt");
             this.rcpt = rcpt;
+            return this;
         }
 
         public List<Var> getVars() {
             return vars;
         }
 
-        public void setVars(List<Var> vars) {
+        public RecipientVars setVars(List<Var> vars) {
             Assert.notNull(vars, "vars");
             this.vars = vars;
-        }
-
-        public void setVars(Var... vars) {
-            setVars(new ArrayList<Var>(Arrays.asList(vars)));
+            return this;
         }
 
         public RecipientVars addVar(String name, Object content) {
@@ -998,24 +1003,27 @@ public class Message {
             return type;
         }
 
-        public void setType(String type) {
+        public Attachment setType(String type) {
             this.type = type;
+            return this;
         }
 
         public String getName() {
             return name;
         }
 
-        public void setName(String name) {
+        public Attachment setName(String name) {
             this.name = name;
+            return this;
         }
 
         public String getContent() {
             return content;
         }
 
-        public void setContent(String content) {
+        public Attachment setContent(String content) {
             this.content = content;
+            return this;
         }
 
     }
@@ -1031,11 +1039,12 @@ public class Message {
          * the MIME type of the image - must start with "image/"
          */
         @Override
-        public void setType(String type) {
+        public EmbeddedImage setType(String type) {
             if (type == null || !type.toLowerCase().startsWith("image/")) {
                 throw new IllegalArgumentException("type must start with 'image/'");
             }
             super.setType(type);
+            return this;
         }
 
         /**
@@ -1043,8 +1052,9 @@ public class Message {
          * the image in your HTML content
          */
         @Override
-        public void setName(String name) {
+        public EmbeddedImage setName(String name) {
             super.setName(name);
+            return this;
         }
 
     }

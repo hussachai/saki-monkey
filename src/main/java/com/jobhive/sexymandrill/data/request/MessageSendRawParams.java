@@ -6,6 +6,7 @@ import java.util.Set;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.jobhive.sexymandrill.Defaults;
+import com.jobhive.sexymandrill.utils.Literal;
 
 /**
  * 
@@ -101,6 +102,11 @@ public class MessageSendRawParams extends ApiParam{
         return this;
     }
 
+    public MessageSendRawParams setToEmails(String... toEmails) {
+        this.toEmails = Literal.set(toEmails);
+        return this;
+    }
+    
     public Boolean getAsync() {
         return async;
     }

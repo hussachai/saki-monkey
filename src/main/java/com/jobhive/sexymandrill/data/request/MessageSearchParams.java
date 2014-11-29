@@ -1,11 +1,11 @@
 package com.jobhive.sexymandrill.data.request;
 
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.jobhive.sexymandrill.Defaults;
+import com.jobhive.sexymandrill.utils.Literal;
 
 /**
  * 
@@ -93,12 +93,7 @@ public class MessageSearchParams extends ApiParam  {
     }
 
     public MessageSearchParams setTags(String... tags) {
-        if (tags != null) {
-            this.tags = new HashSet<String>();
-            for (String tag : tags) {
-                this.tags.add(tag);
-            }
-        }
+        this.tags = Literal.set(tags);
         return this;
     }
 
@@ -112,12 +107,7 @@ public class MessageSearchParams extends ApiParam  {
     }
 
     public MessageSearchParams setSenders(String... senders) {
-        if (senders != null) {
-            this.senders = new HashSet<String>();
-            for (String sender : senders) {
-                this.senders.add(sender);
-            }
-        }
+        this.senders = Literal.set(senders);
         return this;
     }
     
@@ -131,12 +121,7 @@ public class MessageSearchParams extends ApiParam  {
     }
 
     public MessageSearchParams setApiKeys(String... apiKeys) {
-        if (apiKeys != null) {
-            this.apiKeys = new HashSet<String>();
-            for (String apiKey : apiKeys) {
-                this.apiKeys.add(apiKey);
-            }
-        }
+        this.apiKeys = Literal.set(apiKeys);
         return this;
     }
 
