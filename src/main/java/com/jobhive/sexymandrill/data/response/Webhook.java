@@ -13,7 +13,7 @@ import com.jobhive.sexymandrill.utils.Literal;
  * @author Hussachai
  *
  */
-public class WebhookResponse {
+public class Webhook {
     
     /**
      * a unique integer indentifier for the webhook
@@ -74,7 +74,7 @@ public class WebhookResponse {
         return id;
     }
     
-    public WebhookResponse setId(Integer id) {
+    public Webhook setId(Integer id) {
         this.id = id;
         return this;
     }
@@ -83,7 +83,7 @@ public class WebhookResponse {
         return url;
     }
 
-    public WebhookResponse setUrl(String url) {
+    public Webhook setUrl(String url) {
         this.url = url;
         return this;
     }
@@ -92,7 +92,7 @@ public class WebhookResponse {
         return description;
     }
 
-    public WebhookResponse setDescription(String description) {
+    public Webhook setDescription(String description) {
         this.description = description;
         return this;
     }
@@ -101,7 +101,7 @@ public class WebhookResponse {
         return authKey;
     }
 
-    public WebhookResponse setAuthKey(String authKey) {
+    public Webhook setAuthKey(String authKey) {
         this.authKey = authKey;
         return this;
     }
@@ -110,12 +110,12 @@ public class WebhookResponse {
         return events;
     }
 
-    public WebhookResponse setEvents(List<MessageEvent> events) {
+    public Webhook setEvents(List<MessageEvent> events) {
         this.events = events;
         return this;
     }
     
-    public WebhookResponse setEvents(MessageEvent...events){
+    public Webhook setEvents(MessageEvent...events){
         this.events = Literal.list(events);
         return this;
     }
@@ -124,7 +124,7 @@ public class WebhookResponse {
         return createdAt;
     }
 
-    public WebhookResponse setCreatedAt(Date createdAt) {
+    public Webhook setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
         return this;
     }
@@ -133,7 +133,7 @@ public class WebhookResponse {
         return lastSentAt;
     }
 
-    public WebhookResponse setLastSentAt(Date lastSentAt) {
+    public Webhook setLastSentAt(Date lastSentAt) {
         this.lastSentAt = lastSentAt;
         return this;
     }
@@ -142,7 +142,7 @@ public class WebhookResponse {
         return batchesSent;
     }
 
-    public WebhookResponse setBatchesSent(Integer batchesSent) {
+    public Webhook setBatchesSent(Integer batchesSent) {
         this.batchesSent = batchesSent;
         return this;
     }
@@ -151,7 +151,7 @@ public class WebhookResponse {
         return eventsSent;
     }
 
-    public WebhookResponse setEventsSent(Integer eventsSent) {
+    public Webhook setEventsSent(Integer eventsSent) {
         this.eventsSent = eventsSent;
         return this;
     }
@@ -160,7 +160,7 @@ public class WebhookResponse {
         return lastError;
     }
 
-    public WebhookResponse setLastError(String lastError) {
+    public Webhook setLastError(String lastError) {
         this.lastError = lastError;
         return this;
     }

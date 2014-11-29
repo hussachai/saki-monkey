@@ -9,7 +9,7 @@ import org.apache.http.HttpResponse;
 import com.jobhive.sexymandrill.MandrillAsyncClient;
 import com.jobhive.sexymandrill.api.async.callback.ObjectResponseCallback;
 import com.jobhive.sexymandrill.data.MessageEvent;
-import com.jobhive.sexymandrill.data.response.WebhookResponse;
+import com.jobhive.sexymandrill.data.response.Webhook;
 import com.jobhive.sexymandrill.utils.Assert;
 
 /**
@@ -28,7 +28,7 @@ public class WebhookAsyncApi extends MandrillAsyncApi {
      * @param callback
      * @return
      */
-    public Future<HttpResponse> list(ObjectResponseCallback<WebhookResponse[]> callback) {
+    public Future<HttpResponse> list(ObjectResponseCallback<Webhook[]> callback) {
         return getClient().execute("/webhooks/list.json", null, callback);
     }
     
@@ -41,7 +41,7 @@ public class WebhookAsyncApi extends MandrillAsyncApi {
      * @return
      */
     public Future<HttpResponse> add(String url, String description, List<MessageEvent> events,
-            ObjectResponseCallback<WebhookResponse> callback) {
+            ObjectResponseCallback<Webhook> callback) {
         Assert.notEmpty(url, "url");
         Map<String, Object> params = mapParams("url", url)
                 .p("description", description).p("events", events);
@@ -55,7 +55,7 @@ public class WebhookAsyncApi extends MandrillAsyncApi {
      * @return
      */
     public Future<HttpResponse> info(Integer id,
-            ObjectResponseCallback<WebhookResponse> callback) {
+            ObjectResponseCallback<Webhook> callback) {
         Assert.notNull(id, "id");
         return getClient().execute("/webhooks/info.json", mapParams("id", id), callback);
     }
@@ -70,7 +70,7 @@ public class WebhookAsyncApi extends MandrillAsyncApi {
      * @return
      */
     public Future<HttpResponse> update(Integer id, String url, String description, 
-            List<MessageEvent> events, ObjectResponseCallback<WebhookResponse> callback) {
+            List<MessageEvent> events, ObjectResponseCallback<Webhook> callback) {
         Assert.notNull(id, "id");
         Assert.notEmpty(url, "url");
         Map<String, Object> params = mapParams("url", url)
@@ -85,7 +85,7 @@ public class WebhookAsyncApi extends MandrillAsyncApi {
      * @return
      */
     public Future<HttpResponse> delete(Integer id,
-            ObjectResponseCallback<WebhookResponse> callback) {
+            ObjectResponseCallback<Webhook> callback) {
         Assert.notNull(id, "id");
         return getClient().execute("/webhooks/delete.json", mapParams("id", id), callback);
     }
