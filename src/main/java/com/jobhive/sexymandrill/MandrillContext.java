@@ -31,10 +31,18 @@ public class MandrillContext {
 
     private ObjectMapper objectMapper;
     
+    private MandrillMetadata metadata;
+    
     public MandrillContext(String apiKey, String configPath) {
         this.config = createConfigObject(configPath);
         this.apiKey = (apiKey != null)? apiKey: this.config.getString("apiKey");
         this.objectMapper = createObjectMapper();
+        this.metadata = new MandrillMetadata();
+        
+        Package thisPackage = getClass().getPackage();
+        metadata.name = thisPackage.getImplementationTitle();
+        metadata.name = thisPackage.getImplementationVersion();
+        
     }
     
     public Config getConfig(){
@@ -51,6 +59,10 @@ public class MandrillContext {
     
     public ObjectMapper getObjectMapper() {
         return objectMapper;
+    }
+    
+    public MandrillMetadata getMetadata(){
+        return metadata;
     }
     
     protected Config createConfigObject(String configPath){
@@ -95,5 +107,18 @@ public class MandrillContext {
         return mapper;
     }
     
+    public static class MandrillMetadata {
+        
+        private String name;
+        
+        private String version;
 
+        public String getName() {
+            return name;
+        }
+
+        public String getVersion() {
+            return version;
+        }
+    }
 }

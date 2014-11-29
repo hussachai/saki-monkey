@@ -7,12 +7,15 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 
+import javax.net.ssl.HostnameVerifier;
+
 import org.apache.http.HttpHost;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.CredentialsProvider;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.config.RequestConfig.Builder;
+import org.apache.http.conn.ssl.DefaultHostnameVerifier;
 import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -64,6 +67,11 @@ public abstract class AbstractMandrillClient {
         return "{\"key\": \"" + context.getApiKey() + "\"}";
     }
     
+    protected String getUserAgent(){
+        return context.getMetadata().getName() + "/" 
+                + context.getMetadata().getVersion(); 
+    }
+    
     protected String convertParamsToJson(Object params) {
         if(params == null){
             log.debug("JSON param of ApiParam : [apiKey]");
@@ -102,6 +110,14 @@ public abstract class AbstractMandrillClient {
             }
         }
         return null;
+    }
+    
+    /**
+     * 
+     * @return
+     */
+    protected HostnameVerifier createHostnameVerifier(){
+        return new DefaultHostnameVerifier();
     }
     
     protected CredentialsProvider createDefaultCredentialsProvider(String host, int port){

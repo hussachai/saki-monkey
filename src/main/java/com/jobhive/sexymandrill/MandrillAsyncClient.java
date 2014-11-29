@@ -8,7 +8,6 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.CredentialsProvider;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.concurrent.FutureCallback;
-import org.apache.http.conn.ssl.DefaultHostnameVerifier;
 import org.apache.http.conn.ssl.SSLContexts;
 import org.apache.http.entity.ContentType;
 import org.apache.http.impl.nio.client.CloseableHttpAsyncClient;
@@ -79,9 +78,14 @@ public class MandrillAsyncClient extends AbstractMandrillClient{
         }
     }
     
+    /**
+     * 
+     * @return
+     */
     protected SchemeIOSessionStrategy createSchemeIOSessionStrategy(){
+        
         return new SSLIOSessionStrategy(
-                SSLContexts.createDefault(), new DefaultHostnameVerifier());
+                SSLContexts.createDefault(), createHostnameVerifier());
     }
     
     /**
@@ -103,6 +107,9 @@ public class MandrillAsyncClient extends AbstractMandrillClient{
                 clientBuilder.setDefaultCredentialsProvider(credsProvider);
             }
         }
+        String userAgent = getUserAgent();
+        log.debug("User-Agent: {}", userAgent);
+        clientBuilder.setUserAgent(userAgent);
         clientBuilder.setDefaultRequestConfig(createDefaultRequestConfig());
         return clientBuilder.build();
     }

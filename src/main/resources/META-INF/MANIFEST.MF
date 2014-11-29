@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Archiver-Version: Plexus Archiver
+Created-By: Apache Maven ${maven.version}
+Built-By: Hussachai Puripunpinyo
+Build-Jdk: ${java.version}
+Implementation-Title: Sexy Mandrill
+Implementation-Version: ${project.version}
+
