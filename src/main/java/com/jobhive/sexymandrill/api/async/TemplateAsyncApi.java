@@ -8,12 +8,11 @@ import org.apache.http.HttpResponse;
 
 import com.jobhive.sexymandrill.MandrillAsyncClient;
 import com.jobhive.sexymandrill.api.async.callback.ObjectResponseCallback;
-import com.jobhive.sexymandrill.data.TemplateContent;
-import com.jobhive.sexymandrill.data.Var;
-import com.jobhive.sexymandrill.data.param.TemplateParams;
+import com.jobhive.sexymandrill.data.request.Message.Var;
+import com.jobhive.sexymandrill.data.request.TemplateContent;
+import com.jobhive.sexymandrill.data.request.TemplateParams;
 import com.jobhive.sexymandrill.data.response.RenderedTemplate;
 import com.jobhive.sexymandrill.data.response.Template;
-import com.jobhive.sexymandrill.utils.Assert;
 import com.jobhive.sexymandrill.utils.Literal;
 
 /**
@@ -35,7 +34,6 @@ public class TemplateAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> add(TemplateParams params,
             ObjectResponseCallback<Template> callback) {
-        Assert.notEmpty(params.getName(), "Template name");
         return getClient().execute("/templates/add.json", params, callback);
     }
     
@@ -47,7 +45,6 @@ public class TemplateAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> info(String name,
             ObjectResponseCallback<Template> callback) {
-        Assert.notEmpty(name, "Template name");
         return getClient().execute("/templates/info.json", 
                 mapParams("name", name), callback);
     }
@@ -61,7 +58,6 @@ public class TemplateAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> update(TemplateParams params,
             ObjectResponseCallback<Template> callback) {
-        Assert.notEmpty(params.getName(), "Template name");
         return getClient().execute("/templates/update.json", 
                 params, callback);
     }
@@ -75,7 +71,6 @@ public class TemplateAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> publish(String name,
             ObjectResponseCallback<Template> callback) {
-        Assert.notEmpty(name, "Template name");
         return getClient().execute("/templates/publish.json", 
                 mapParams("name", name), callback);
     }
@@ -88,7 +83,6 @@ public class TemplateAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> delete(String name,
             ObjectResponseCallback<Template> callback) {
-        Assert.notEmpty(name, "Template name");
         return getClient().execute("/templates/delete.json", 
                 mapParams("name", name), callback);
     }
@@ -122,7 +116,6 @@ public class TemplateAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> timeSeries(String name,
             ObjectResponseCallback<Template[]> callback) {
-        Assert.notEmpty(name, "Template name");
         return getClient().execute("/templates/time-series.json", 
                 mapParams("name", name), callback);
     }
@@ -142,7 +135,6 @@ public class TemplateAsyncApi extends MandrillAsyncApi {
     public Future<HttpResponse> render(String name,
             List<TemplateContent> templateContents, List<Var> mergeVars,
             ObjectResponseCallback<RenderedTemplate> callback) {
-        Assert.notEmpty(name, "Template name");
         /* TemplateContent is required field even we don't need it */
         if(templateContents == null){
             templateContents = Literal.list(new TemplateContent("N", "O"));

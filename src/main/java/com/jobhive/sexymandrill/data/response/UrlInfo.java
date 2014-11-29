@@ -1,5 +1,10 @@
 package com.jobhive.sexymandrill.data.response;
 
+import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.jobhive.sexymandrill.Defaults;
+
 /**
  * 
  * @author Hussachai
@@ -15,51 +20,41 @@ public class UrlInfo {
     /**
      * the number of emails that contained the URL
      */
-    private int sent;
+    private Integer sent;
     
     /**
      * the number of times the URL has been clicked from a tracked email
      */
-    private int clicks;
+    private Integer clicks;
     
     /**
      * the number of unique emails that have generated clicks for this URL
      */
-    private int uniqueClicks;
-
+    private Integer uniqueClicks;
+    
     public String getUrl() {
         return url;
     }
 
-    public UrlInfo setUrl(String url) {
-        this.url = url;
-        return this;
-    }
-
-    public int getSent() {
+    public Integer getSent() {
         return sent;
     }
 
-    public UrlInfo setSent(int sent) {
-        this.sent = sent;
-        return this;
-    }
-
-    public int getClicks() {
+    public Integer getClicks() {
         return clicks;
     }
 
-    public UrlInfo setClicks(int clicks) {
-        this.clicks = clicks;
-        return this;
-    }
-
-    public int getUniqueClicks() {
+    public Integer getUniqueClicks() {
         return uniqueClicks;
     }
 
-    public UrlInfo setUniqueClicks(int uniqueClicks) {
-        this.uniqueClicks = uniqueClicks;
-        return this;
+    public static class TimedUrlInfo extends UrlInfo {
+
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Defaults.DATETIME_FORMAT, timezone = Defaults.TIME_ZONE)
+        private Date time;
+
+        public Date getTime() {
+            return time;
+        }
     }
 }

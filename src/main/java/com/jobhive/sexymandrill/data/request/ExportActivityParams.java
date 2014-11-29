@@ -1,11 +1,10 @@
-package com.jobhive.sexymandrill.data.param;
+package com.jobhive.sexymandrill.data.request;
 
 import java.util.Date;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.jobhive.sexymandrill.Defaults;
-import com.jobhive.sexymandrill.data.MessageState;
 
 /**
  * 
@@ -114,4 +113,31 @@ public class ExportActivityParams {
         return this;
     }
     
+    /**
+     * a message state
+     * 
+     * This enum is used in Exports.activity
+     * @author Hussachai
+     *
+     */
+    public enum MessageState {
+        
+        SENT("sent"), 
+        REJECTED("rejected"), 
+        BOUNCED("bounced"), 
+        SOFT_BOUNCED("soft-bounced"), 
+        SPAM("spam"), 
+        UNSUB("unsub");
+        
+        private String value;
+
+        MessageState(String value) {
+            this.value = value;
+        }
+        
+        @Override
+        public String toString(){
+            return value;
+        }
+    }
 }

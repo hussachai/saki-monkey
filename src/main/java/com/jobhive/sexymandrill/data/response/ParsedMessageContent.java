@@ -3,9 +3,7 @@ package com.jobhive.sexymandrill.data.response;
 import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.jobhive.sexymandrill.data.Attachment;
-import com.jobhive.sexymandrill.data.EmbeddedImage;
-import com.jobhive.sexymandrill.data.Recipient;
+import com.jobhive.sexymandrill.data.response.MessageContent.Recipient;
 
 /**
  * 
@@ -56,77 +54,66 @@ public class ParsedMessageContent {
      * an array of any embedded images that can be found in the message
      */
     private EmbeddedImage[] images;
-
+    
     public String getSubject() {
         return subject;
-    }
-
-    public void setSubject(String subject) {
-        this.subject = subject;
     }
 
     public String getFromEmail() {
         return fromEmail;
     }
 
-    public void setFromEmail(String fromEmail) {
-        this.fromEmail = fromEmail;
-    }
-
     public String getFromName() {
         return fromName;
-    }
-
-    public void setFromName(String fromName) {
-        this.fromName = fromName;
     }
 
     public Recipient[] getRecipients() {
         return recipients;
     }
 
-    public void setRecipients(Recipient[] recipients) {
-        this.recipients = recipients;
-    }
-
     public Map<String, String> getHeaders() {
         return headers;
-    }
-
-    public void setHeaders(Map<String, String> headers) {
-        this.headers = headers;
     }
 
     public String getText() {
         return text;
     }
 
-    public void setText(String text) {
-        this.text = text;
-    }
-
     public String getHtml() {
         return html;
-    }
-
-    public void setHtml(String html) {
-        this.html = html;
     }
 
     public Attachment[] getAttachments() {
         return attachments;
     }
 
-    public void setAttachments(Attachment[] attachments) {
-        this.attachments = attachments;
-    }
-
     public EmbeddedImage[] getImages() {
         return images;
     }
 
-    public void setImages(EmbeddedImage[] images) {
-        this.images = images;
+    /**
+     * 
+     * @author Hussachai
+     *
+     */
+    public static class Attachment extends MessageContent.Attachment{
+        
+        /**
+         * if this is set to true, the attachment is not pure-text, 
+         * and the content will be base64 encoded
+         */
+        private Boolean binary;
+        
+        public Boolean getBinary() {
+            return binary;
+        }
     }
+    
+    /**
+     * 
+     * @author Hussachai
+     *
+     */
+    public static class EmbeddedImage extends MessageContent.Attachment{}
     
 }

@@ -17,6 +17,11 @@ import org.apache.http.nio.entity.NStringEntity;
 import com.jobhive.sexymandrill.api.async.callback.JsonHttpFutureCallback;
 import com.jobhive.sexymandrill.api.async.callback.ObjectResponseCallback;
 
+/**
+ * 
+ * @author Hussachai
+ *
+ */
 public class MandrillAsyncClient extends AbstractMandrillClient{
     
     private CloseableHttpAsyncClient httpAsyncClient;

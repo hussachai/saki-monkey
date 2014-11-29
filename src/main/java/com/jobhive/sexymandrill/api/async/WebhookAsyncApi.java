@@ -8,9 +8,8 @@ import org.apache.http.HttpResponse;
 
 import com.jobhive.sexymandrill.MandrillAsyncClient;
 import com.jobhive.sexymandrill.api.async.callback.ObjectResponseCallback;
-import com.jobhive.sexymandrill.data.MessageEvent;
 import com.jobhive.sexymandrill.data.response.Webhook;
-import com.jobhive.sexymandrill.utils.Assert;
+import com.jobhive.sexymandrill.data.response.Webhook.MessageEvent;
 
 /**
  * 
@@ -40,9 +39,9 @@ public class WebhookAsyncApi extends MandrillAsyncApi {
      * @param callback
      * @return
      */
-    public Future<HttpResponse> add(String url, String description, List<MessageEvent> events,
+    public Future<HttpResponse> add(String url, String description, 
+            List<MessageEvent> events,
             ObjectResponseCallback<Webhook> callback) {
-        Assert.notEmpty(url, "url");
         Map<String, Object> params = mapParams("url", url)
                 .p("description", description).p("events", events);
         return getClient().execute("/webhooks/add.json", params, callback);
@@ -56,8 +55,8 @@ public class WebhookAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> info(Integer id,
             ObjectResponseCallback<Webhook> callback) {
-        Assert.notNull(id, "id");
-        return getClient().execute("/webhooks/info.json", mapParams("id", id), callback);
+        return getClient().execute("/webhooks/info.json", 
+                mapParams("id", id), callback);
     }
     
     /**
@@ -71,8 +70,6 @@ public class WebhookAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> update(Integer id, String url, String description, 
             List<MessageEvent> events, ObjectResponseCallback<Webhook> callback) {
-        Assert.notNull(id, "id");
-        Assert.notEmpty(url, "url");
         Map<String, Object> params = mapParams("url", url)
                 .p("description", description).p("events", events);
         return getClient().execute("/webhooks/update.json", params, callback);
@@ -86,7 +83,7 @@ public class WebhookAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> delete(Integer id,
             ObjectResponseCallback<Webhook> callback) {
-        Assert.notNull(id, "id");
-        return getClient().execute("/webhooks/delete.json", mapParams("id", id), callback);
+        return getClient().execute("/webhooks/delete.json", 
+                mapParams("id", id), callback);
     }
 }

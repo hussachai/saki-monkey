@@ -1,5 +1,10 @@
 package com.jobhive.sexymandrill.utils;
 
+/**
+ * 
+ * @author Hussachai
+ *
+ */
 public class Assert {
 
     /**

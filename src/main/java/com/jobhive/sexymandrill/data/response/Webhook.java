@@ -1,12 +1,9 @@
 package com.jobhive.sexymandrill.data.response;
 
 import java.util.Date;
-import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.jobhive.sexymandrill.Defaults;
-import com.jobhive.sexymandrill.data.MessageEvent;
-import com.jobhive.sexymandrill.utils.Literal;
 
 /**
  * 
@@ -38,7 +35,7 @@ public class Webhook {
     /**
      * The message events that will be posted to the hook
      */
-    private List<MessageEvent> events;
+    private MessageEvent[] events;
     
     /**
      * the date and time that the webhook was created as a UTC string 
@@ -69,99 +66,67 @@ public class Webhook {
      * the last error that we've seen
      */
     private String lastError;
-
+    
     public Integer getId() {
         return id;
-    }
-    
-    public Webhook setId(Integer id) {
-        this.id = id;
-        return this;
     }
 
     public String getUrl() {
         return url;
     }
 
-    public Webhook setUrl(String url) {
-        this.url = url;
-        return this;
-    }
-
     public String getDescription() {
         return description;
-    }
-
-    public Webhook setDescription(String description) {
-        this.description = description;
-        return this;
     }
 
     public String getAuthKey() {
         return authKey;
     }
 
-    public Webhook setAuthKey(String authKey) {
-        this.authKey = authKey;
-        return this;
-    }
-
-    public List<MessageEvent> getEvents() {
+    public MessageEvent[] getEvents() {
         return events;
     }
 
-    public Webhook setEvents(List<MessageEvent> events) {
-        this.events = events;
-        return this;
-    }
-    
-    public Webhook setEvents(MessageEvent...events){
-        this.events = Literal.list(events);
-        return this;
-    }
-    
     public Date getCreatedAt() {
         return createdAt;
-    }
-
-    public Webhook setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-        return this;
     }
 
     public Date getLastSentAt() {
         return lastSentAt;
     }
 
-    public Webhook setLastSentAt(Date lastSentAt) {
-        this.lastSentAt = lastSentAt;
-        return this;
-    }
-
     public Integer getBatchesSent() {
         return batchesSent;
-    }
-
-    public Webhook setBatchesSent(Integer batchesSent) {
-        this.batchesSent = batchesSent;
-        return this;
     }
 
     public Integer getEventsSent() {
         return eventsSent;
     }
 
-    public Webhook setEventsSent(Integer eventsSent) {
-        this.eventsSent = eventsSent;
-        return this;
-    }
-
     public String getLastError() {
         return lastError;
     }
 
-    public Webhook setLastError(String lastError) {
-        this.lastError = lastError;
-        return this;
+    /**
+     * the individual message event
+     * 
+     * This enum is used in webhook.
+     * 
+     * @author Hussachai
+     *
+     */
+    public enum MessageEvent {
+        SEND, HARD_BOUNCE, SOFT_BOUNCE, OPEN, CLICK, SPAM, UNSUB, REJECT;
+        
+        private String value;
+        
+        MessageEvent(){
+            this.value = name().toLowerCase();
+        }
+        
+        @Override
+        public String toString() {
+            return value;
+        }
     }
 }

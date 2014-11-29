@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.jobhive.sexymandrill.data.param.ApiParam;
+import com.jobhive.sexymandrill.data.request.ApiParam;
 import com.jobhive.sexymandrill.exception.IORuntimeException;
 
 /**

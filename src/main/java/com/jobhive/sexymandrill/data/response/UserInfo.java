@@ -4,79 +4,81 @@ import java.util.Date;
 import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.jobhive.sexymandrill.data.SummaryInfo;
 
+/**
+ * 
+ * @author Hussachai
+ *
+ */
 public class UserInfo {
 
+    /**
+     * the username of the user (used for SMTP authentication)
+     */
     private String username;
 
+    /**
+     * the date and time that the user's Mandrill account 
+     * was created as a UTC string in YYYY-MM-DD HH:MM:SS format
+     */
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "UTC")
     private Date createdAt;
 
+    /**
+     * a unique, permanent identifier for this user
+     */
     private String publicId;
 
-    private int reputation;
+    /**
+     * the reputation of the user on a scale from 0 to 100, 
+     * with 75 generally being a "good" reputation
+     */
+    private Integer reputation;
 
-    private int hourlyQuota;
+    /**
+     * the maximum number of emails Mandrill will deliver for this user each hour. 
+     * Any emails beyond that will be accepted and queued for later delivery. 
+     * Users with higher reputations will have higher hourly quotas
+     */
+    private Integer hourlyQuota;
 
-    private int backlog;
+    /**
+     * the number of emails that are queued for delivery due to exceeding 
+     * your monthly or hourly quotas
+     */
+    private Integer backlog;
 
-    private Map<String, SummaryInfo> stats;
+    /**
+     * an aggregate summary of the account's sending stats
+     */
+    private Map<String, Stats> stats;
 
     public String getUsername() {
         return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public Date getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
     public String getPublicId() {
         return publicId;
     }
 
-    public void setPublicId(String publicId) {
-        this.publicId = publicId;
-    }
-
-    public int getReputation() {
+    public Integer getReputation() {
         return reputation;
     }
 
-    public void setReputation(int reputation) {
-        this.reputation = reputation;
-    }
-
-    public int getHourlyQuota() {
+    public Integer getHourlyQuota() {
         return hourlyQuota;
     }
 
-    public void setHourlyQuota(int hourlyQuota) {
-        this.hourlyQuota = hourlyQuota;
-    }
-
-    public int getBacklog() {
+    public Integer getBacklog() {
         return backlog;
     }
 
-    public void setBacklog(int backlog) {
-        this.backlog = backlog;
-    }
-
-    public Map<String, SummaryInfo> getStats() {
+    public Map<String, Stats> getStats() {
         return stats;
-    }
-
-    public void setStats(Map<String, SummaryInfo> stats) {
-        this.stats = stats;
     }
     
 }

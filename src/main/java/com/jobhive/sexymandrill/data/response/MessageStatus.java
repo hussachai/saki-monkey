@@ -9,49 +9,44 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class MessageStatus {
 
+    /**
+     * the message's unique id
+     */
     @JsonProperty("_id")
     private String id;
 
+    /**
+     * the email address of the recipient
+     */
     private String email;
 
+    /**
+     * the sending status of the recipient - 
+     * either "sent", "queued", "scheduled", "rejected", or "invalid"
+     */
     private String status;
 
+    /**
+     * the reason for the rejection if the recipient status is "rejected" - 
+     * one of "hard-bounce", "soft-bounce", "spam", "unsub", "custom", 
+     * "invalid-sender", "invalid", "test-mode-limit", or "rule"
+     */
     private String rejectReason;
 
     public String getId() {
         return id;
     }
 
-    public MessageStatus setId(String id) {
-        this.id = id;
-        return this;
-    }
-
     public String getEmail() {
         return email;
-    }
-
-    public MessageStatus setEmail(String email) {
-        this.email = email;
-        return this;
     }
 
     public String getStatus() {
         return status;
     }
 
-    public MessageStatus setStatus(String status) {
-        this.status = status;
-        return this;
-    }
-
     public String getRejectReason() {
         return rejectReason;
-    }
-
-    public MessageStatus setRejectReason(String rejectReason) {
-        this.rejectReason = rejectReason;
-        return this;
     }
     
 }

@@ -6,9 +6,9 @@ import org.apache.http.HttpResponse;
 
 import com.jobhive.sexymandrill.MandrillAsyncClient;
 import com.jobhive.sexymandrill.api.async.callback.ObjectResponseCallback;
-import com.jobhive.sexymandrill.data.response.TimedUrlInfo;
 import com.jobhive.sexymandrill.data.response.TrackingDomain;
 import com.jobhive.sexymandrill.data.response.UrlInfo;
+import com.jobhive.sexymandrill.data.response.UrlInfo.TimedUrlInfo;
 
 /**
  * 

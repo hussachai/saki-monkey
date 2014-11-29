@@ -8,7 +8,6 @@ import org.apache.http.HttpResponse;
 import com.jobhive.sexymandrill.MandrillAsyncClient;
 import com.jobhive.sexymandrill.api.async.callback.ObjectResponseCallback;
 import com.jobhive.sexymandrill.data.response.Metadata;
-import com.jobhive.sexymandrill.utils.Assert;
 
 /**
  * 
@@ -40,7 +39,6 @@ public class MetadataAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> add(String name, String viewTemplate,
         ObjectResponseCallback<Metadata> callback) {
-        Assert.notEmpty(name, "name");
         Map<String, Object> params = mapParams("name", name).p("view_template", viewTemplate);
         return getClient().execute("/metadata/add.json", params, callback);
     }
@@ -55,7 +53,6 @@ public class MetadataAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> update(String name, String viewTemplate,
             ObjectResponseCallback<Metadata> callback) {
-        Assert.notEmpty(name, "name");
         Map<String, Object> params = mapParams("name", name).p("view_template", viewTemplate);
         return getClient().execute("/metadata/update.json", params, callback);
     }
@@ -70,7 +67,6 @@ public class MetadataAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> delete(String name,
             ObjectResponseCallback<Metadata> callback) {
-        Assert.notEmpty(name, "name");
         return getClient().execute("/metadata/delete.json", 
                 mapParams("name", name), callback);
     }

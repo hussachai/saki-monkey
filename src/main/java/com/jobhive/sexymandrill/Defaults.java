@@ -6,6 +6,11 @@ import java.util.Date;
 
 import com.jobhive.sexymandrill.exception.ParseRuntimException;
 
+/**
+ * 
+ * @author Hussachai
+ *
+ */
 public final class Defaults {
     
     public static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";

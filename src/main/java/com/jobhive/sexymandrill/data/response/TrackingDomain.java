@@ -4,7 +4,7 @@ import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.jobhive.sexymandrill.Defaults;
-import com.jobhive.sexymandrill.data.DomainRecord;
+import com.jobhive.sexymandrill.data.response.Domain.DomainRecord;
 
 /**
  * 
@@ -45,45 +45,19 @@ public class TrackingDomain {
         return domain;
     }
 
-    public TrackingDomain setDomain(String domain) {
-        this.domain = domain;
-        return this;
-    }
-
     public Date getCreatedAt() {
         return createdAt;
-    }
-
-    public TrackingDomain setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-        return this;
     }
 
     public Date getLastTestedAt() {
         return lastTestedAt;
     }
 
-    public TrackingDomain setLastTestedAt(Date lastTestedAt) {
-        this.lastTestedAt = lastTestedAt;
-        return this;
-    }
-
     public DomainRecord getCname() {
         return cname;
-    }
-
-    public TrackingDomain setCname(DomainRecord cname) {
-        this.cname = cname;
-        return this;
     }
 
     public Boolean getValidTracking() {
         return validTracking;
     }
-
-    public TrackingDomain setValidTracking(Boolean validTracking) {
-        this.validTracking = validTracking;
-        return this;
-    }
-    
 }

@@ -6,10 +6,14 @@ import org.apache.http.HttpResponse;
 
 import com.jobhive.sexymandrill.MandrillAsyncClient;
 import com.jobhive.sexymandrill.api.async.callback.ObjectResponseCallback;
-import com.jobhive.sexymandrill.data.param.ExportActivityParams;
+import com.jobhive.sexymandrill.data.request.ExportActivityParams;
 import com.jobhive.sexymandrill.data.response.ExportJob;
-import com.jobhive.sexymandrill.utils.Assert;
 
+/**
+ * 
+ * @author Hussachai
+ *
+ */
 public class ExportAsyncApi extends MandrillAsyncApi {
 
     public ExportAsyncApi(MandrillAsyncClient client) {
@@ -28,7 +32,6 @@ public class ExportAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> info(String id, 
             ObjectResponseCallback<ExportJob> callback) {
-        Assert.notEmpty(id, "id");
         return getClient().execute("/exports/info.json", 
                 mapParams("id", id), callback);
     }

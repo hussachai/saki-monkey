@@ -10,8 +10,7 @@ import com.jobhive.sexymandrill.MandrillAsyncClient;
 import com.jobhive.sexymandrill.api.async.callback.ObjectResponseCallback;
 import com.jobhive.sexymandrill.data.response.InboundDomain;
 import com.jobhive.sexymandrill.data.response.InboundRoute;
-import com.jobhive.sexymandrill.data.response.RecipientInboundRoute;
-import com.jobhive.sexymandrill.utils.Assert;
+import com.jobhive.sexymandrill.data.response.InboundRoute.InboundRouteRecipient;
 
 /**
  * 
@@ -41,7 +40,6 @@ public class InboundAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> addDomain(String domain,
             ObjectResponseCallback<InboundDomain> callback) {
-        Assert.notEmpty(domain, "domain");
         return getClient().execute("/inbound/add-domain.json", 
                 mapParams("domain", domain), callback);
     }
@@ -55,7 +53,6 @@ public class InboundAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> checkDomain(String domain,
             ObjectResponseCallback<InboundDomain> callback) {
-        Assert.notEmpty(domain, "domain");
         return getClient().execute("/inbound/check-domain.json", 
                 mapParams("domain", domain), callback);
     }
@@ -69,7 +66,6 @@ public class InboundAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> deleteDomain(String domain,
             ObjectResponseCallback<InboundDomain> callback) {
-        Assert.notEmpty(domain, "domain");
         return getClient().execute("/inbound/delete-domain.json", 
                 mapParams("domain", domain), callback);
     }
@@ -106,9 +102,6 @@ public class InboundAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> addRoute(String domain, String pattern, String url,
             ObjectResponseCallback<InboundRoute> callback) {
-        Assert.notEmpty(domain, "domain");
-        Assert.notEmpty(pattern, "pattern");
-        Assert.notEmpty(url, "url");
         Map<String, Object> params = mapParams("domain", domain)
                 .p("pattern", pattern).p("url", url);
         return getClient().execute("/inbound/add-route.json", 
@@ -126,7 +119,6 @@ public class InboundAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> updateRoute(String id, String pattern, String url,
             ObjectResponseCallback<InboundRoute> callback) {
-        Assert.notEmpty(id, "id");
         Map<String, Object> params = mapParams("id", id)
                 .p("pattern", pattern).p("url", url);
         return getClient().execute("/inbound/update-route.json", 
@@ -141,7 +133,6 @@ public class InboundAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> deleteRoute(String id,
             ObjectResponseCallback<InboundRoute> callback) {
-        Assert.notEmpty(id, "id");
         return getClient().execute("/inbound/delete-route.json", 
                 mapParams("id", id), callback);
     }
@@ -162,8 +153,7 @@ public class InboundAsyncApi extends MandrillAsyncApi {
     public Future<HttpResponse> sendRaw(String rawMessage,
             List<String> toEmails, String mailFrom,
             String helo, String clientAddress,
-            ObjectResponseCallback<RecipientInboundRoute[]> callback) {
-        Assert.notEmpty(rawMessage, "rawMessage");
+            ObjectResponseCallback<InboundRouteRecipient[]> callback) {
         Map<String, Object> params = mapParams("raw_message", rawMessage)
                 .p("to", toEmails).p("mail_from", mailFrom)
                 .p("helo", helo).p("client_address", clientAddress);

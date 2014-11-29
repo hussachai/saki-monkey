@@ -1,4 +1,4 @@
-package com.jobhive.sexymandrill.data.param;
+package com.jobhive.sexymandrill.data.request;
 
 import java.util.List;
 

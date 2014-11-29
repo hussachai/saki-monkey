@@ -4,10 +4,14 @@ import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.jobhive.sexymandrill.Defaults;
-import com.jobhive.sexymandrill.data.SummaryInfo;
 
-public class SenderInfo extends SummaryInfo {
-
+/**
+ * 
+ * @author Hussachai
+ *
+ */
+public class SenderInfo extends Stats {
+    
     /**
      * the sender's email address
      */
@@ -20,33 +24,18 @@ public class SenderInfo extends SummaryInfo {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Defaults.DATETIME_FORMAT, timezone = Defaults.TIME_ZONE)
     private Date createdAt;
     
-    private int reputation;
+    private Integer reputation;
 
     public String getAddress() {
         return address;
-    }
-
-    public SenderInfo setAddress(String address) {
-        this.address = address;
-        return this;
     }
 
     public Date getCreatedAt() {
         return createdAt;
     }
 
-    public SenderInfo setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-        return this;
-    }
-
-    public int getReputation() {
+    public Integer getReputation() {
         return reputation;
-    }
-
-    public SenderInfo setReputation(int reputation) {
-        this.reputation = reputation;
-        return this;
     }
 
 }

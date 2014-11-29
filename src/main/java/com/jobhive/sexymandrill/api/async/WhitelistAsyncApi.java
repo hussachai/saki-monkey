@@ -6,9 +6,8 @@ import org.apache.http.HttpResponse;
 
 import com.jobhive.sexymandrill.MandrillAsyncClient;
 import com.jobhive.sexymandrill.api.async.callback.ObjectResponseCallback;
-import com.jobhive.sexymandrill.data.response.EmailAddedStatus;
-import com.jobhive.sexymandrill.data.response.EmailDeletedStatus;
-import com.jobhive.sexymandrill.data.response.Whitelist;
+import com.jobhive.sexymandrill.data.response.EmailStatus;
+import com.jobhive.sexymandrill.data.response.WhitelistEntry;
 
 /**
  * 
@@ -31,7 +30,7 @@ public class WhitelistAsyncApi extends MandrillAsyncApi {
      * @return
      */
     public Future<HttpResponse> add(String email, String comment,
-            ObjectResponseCallback<EmailAddedStatus> callback) {
+            ObjectResponseCallback<EmailStatus.AddedStatus> callback) {
         return getClient().execute("/whitelists/add.json", 
                 mapParams("email", email).p("comment", comment), callback);
     }
@@ -42,7 +41,7 @@ public class WhitelistAsyncApi extends MandrillAsyncApi {
      * @return
      */
     public Future<HttpResponse> add(String email, 
-            ObjectResponseCallback<EmailAddedStatus> callback) {
+            ObjectResponseCallback<EmailStatus.AddedStatus> callback) {
         return add(email, null, callback);
     }
     
@@ -54,7 +53,7 @@ public class WhitelistAsyncApi extends MandrillAsyncApi {
      * @return
      */
     public Future<HttpResponse> list(String email, 
-            ObjectResponseCallback<Whitelist[]> callback) {
+            ObjectResponseCallback<WhitelistEntry[]> callback) {
         return getClient().execute("/whitelists/list.json", 
                 mapParams("email", email), callback);
     }
@@ -64,7 +63,7 @@ public class WhitelistAsyncApi extends MandrillAsyncApi {
      * @param callback
      * @return
      */
-    public Future<HttpResponse> list(ObjectResponseCallback<Whitelist[]> callback) {
+    public Future<HttpResponse> list(ObjectResponseCallback<WhitelistEntry[]> callback) {
         return list(null, callback);
     }
     
@@ -75,7 +74,7 @@ public class WhitelistAsyncApi extends MandrillAsyncApi {
      * @return
      */
     public Future<HttpResponse> delete(String email, 
-            ObjectResponseCallback<EmailDeletedStatus> callback) {
+            ObjectResponseCallback<EmailStatus.DeletedStatus> callback) {
         return getClient().execute("/whitelists/delete.json", 
                 mapParams("email", email), callback);
     }

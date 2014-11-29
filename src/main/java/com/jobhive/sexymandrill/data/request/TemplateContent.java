@@ -1,6 +1,5 @@
-package com.jobhive.sexymandrill.data;
+package com.jobhive.sexymandrill.data.request;
 
-import com.jobhive.sexymandrill.utils.Assert;
 
 /**
  * the injection of a single piece of content into a single editable region
@@ -29,17 +28,17 @@ public class TemplateContent {
         return name;
     }
 
-    public void setName(String name) {
-        Assert.notNull(name, "name");
+    public TemplateContent setName(String name) {
         this.name = name;
+        return this;
     }
 
     public String getContent() {
         return content;
     }
 
-    public void setContent(String content) {
-        Assert.notNull(content, "content");
+    public TemplateContent setContent(String content) {
         this.content = content;
+        return this;
     }
 }

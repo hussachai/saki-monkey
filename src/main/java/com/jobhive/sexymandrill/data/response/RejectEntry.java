@@ -10,108 +10,92 @@ import com.jobhive.sexymandrill.Defaults;
  * @author Hussachai
  *
  */
-public class RejectInfo {
+public class RejectEntry {
     
+    /**
+     * the email that is blocked
+     */
     private String email;
     
+    /**
+     * the type of event (hard-bounce, soft-bounce, spam, unsub, custom) 
+     * that caused this rejection
+     */
     private String reason;
     
+    /**
+     * extended details about the event, such as the SMTP diagnostic for 
+     * bounces or the comment for manually-created rejections
+     */
     private String detail;
     
+    /**
+     * when the email was added to the blacklist
+     */
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Defaults.DATETIME_FORMAT, timezone = Defaults.TIME_ZONE)
     private Date createdAt;
     
+    /**
+     * the timestamp of the most recent event that either created or renewed this rejection
+     */
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Defaults.DATETIME_FORMAT, timezone = Defaults.TIME_ZONE)
     private Date lastEventAt;
     
+    /**
+     * when the blacklist entry will expire (this may be in the past)
+     */
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Defaults.DATETIME_FORMAT, timezone = Defaults.TIME_ZONE)
     private Date expiredAt;
     
-    private boolean expired;
+    /**
+     * whether the blacklist entry has expired
+     */
+    private Boolean expired;
     
+    /**
+     * the sender that this blacklist entry applies to, or null if none.
+     */
     private SenderInfo sender;
     
+    /**
+     * the subaccount that this blacklist entry applies to, or null if none.
+     */
     private String subaccount;
 
     public String getEmail() {
         return email;
     }
 
-    public RejectInfo setEmail(String email) {
-        this.email = email;
-        return this;
-    }
-
     public String getReason() {
         return reason;
-    }
-
-    public RejectInfo setReason(String reason) {
-        this.reason = reason;
-        return this;
     }
 
     public String getDetail() {
         return detail;
     }
 
-    public RejectInfo setDetail(String detail) {
-        this.detail = detail;
-        return this;
-    }
-
     public Date getCreatedAt() {
         return createdAt;
-    }
-
-    public RejectInfo setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-        return this;
     }
 
     public Date getLastEventAt() {
         return lastEventAt;
     }
 
-    public RejectInfo setLastEventAt(Date lastEventAt) {
-        this.lastEventAt = lastEventAt;
-        return this;
-    }
-
     public Date getExpiredAt() {
         return expiredAt;
     }
 
-    public RejectInfo setExpiredAt(Date expiredAt) {
-        this.expiredAt = expiredAt;
-        return this;
-    }
-
-    public boolean isExpired() {
+    public Boolean getExpired() {
         return expired;
-    }
-
-    public RejectInfo setExpired(boolean expired) {
-        this.expired = expired;
-        return this;
     }
 
     public SenderInfo getSender() {
         return sender;
     }
 
-    public RejectInfo setSender(SenderInfo sender) {
-        this.sender = sender;
-        return this;
-    }
-
     public String getSubaccount() {
         return subaccount;
-    }
-
-    public RejectInfo setSubaccount(String subaccount) {
-        this.subaccount = subaccount;
-        return this;
     }
     
 }

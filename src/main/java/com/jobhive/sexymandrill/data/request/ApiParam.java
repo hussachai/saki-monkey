@@ -1,6 +1,5 @@
-package com.jobhive.sexymandrill.data.param;
+package com.jobhive.sexymandrill.data.request;
 
-import com.jobhive.sexymandrill.utils.Assert;
 
 /**
  * 
@@ -25,7 +24,6 @@ public abstract class ApiParam {
     }
 
     public void setKey(String key) {
-        Assert.notNull(key, "key");
         this.key = key;
     }
 

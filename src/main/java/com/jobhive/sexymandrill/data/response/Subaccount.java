@@ -2,14 +2,16 @@ package com.jobhive.sexymandrill.data.response;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.jobhive.sexymandrill.Defaults;
 
 /**
  * 
  * @author Hussachai
  *
  */
-public class SubaccountResponse {
+public class Subaccount {
     
     /**
      * a unique indentifier for the subaccount
@@ -46,12 +48,14 @@ public class SubaccountResponse {
      * the date and time that the subaccount was created as a UTC string in 
      * YYYY-MM-DD HH:MM:SS format
      */
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Defaults.DATETIME_FORMAT, timezone = Defaults.TIME_ZONE)
     private Date createdAt;
     
     /**
      * the date and time that the subaccount first sent as a UTC string in 
      * YYYY-MM-DD HH:MM:SS format
      */
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Defaults.DATETIME_FORMAT, timezone = Defaults.TIME_ZONE)
     private Date firstSentAt;
     
     /**
@@ -75,99 +79,81 @@ public class SubaccountResponse {
         return id;
     }
 
-    public SubaccountResponse setId(String id) {
-        this.id = id;
-        return this;
-    }
-
     public String getName() {
         return name;
-    }
-
-    public SubaccountResponse setName(String name) {
-        this.name = name;
-        return this;
     }
 
     public String getNote() {
         return note;
     }
 
-    public SubaccountResponse setNote(String note) {
-        this.note = note;
-        return this;
-    }
-
     public Integer getCustomQuota() {
         return customQuota;
-    }
-
-    public SubaccountResponse setCustomQuota(Integer customQuota) {
-        this.customQuota = customQuota;
-        return this;
     }
 
     public String getStatus() {
         return status;
     }
 
-    public SubaccountResponse setStatus(String status) {
-        this.status = status;
-        return this;
-    }
-
     public Integer getReputation() {
         return reputation;
-    }
-
-    public SubaccountResponse setReputation(Integer reputation) {
-        this.reputation = reputation;
-        return this;
     }
 
     public Date getCreatedAt() {
         return createdAt;
     }
 
-    public SubaccountResponse setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-        return this;
-    }
-
     public Date getFirstSentAt() {
         return firstSentAt;
-    }
-
-    public SubaccountResponse setFirstSentAt(Date firstSentAt) {
-        this.firstSentAt = firstSentAt;
-        return this;
     }
 
     public Integer getSentWeekly() {
         return sentWeekly;
     }
 
-    public SubaccountResponse setSentWeekly(Integer sentWeekly) {
-        this.sentWeekly = sentWeekly;
-        return this;
-    }
-
     public Integer getSentMonthly() {
         return sentMonthly;
-    }
-
-    public SubaccountResponse setSentMonthly(Integer sentMonthly) {
-        this.sentMonthly = sentMonthly;
-        return this;
     }
 
     public Integer getSentTotal() {
         return sentTotal;
     }
-
-    public SubaccountResponse setSentTotal(Integer sentTotal) {
-        this.sentTotal = sentTotal;
-        return this;
-    }
     
+    /**
+     * 
+     * @author Hussachai
+     *
+     */
+    public static class SubaccountInfo extends Subaccount{
+
+        /**
+         * the number of emails the subaccount has sent in the last hour
+         */
+        private Integer sentHourly;
+        
+        /**
+         * the current hourly quota for the subaccount, either manual or reputation-based
+         */
+        private Integer hourlyQuota;
+        
+        /**
+         * stats for this subaccount in the last 30 days
+         */
+        @JsonProperty("last_30_days")
+        private Stats last30DaysStats;
+
+        public Integer getSentHourly() {
+            return sentHourly;
+        }
+
+        public Integer getHourlyQuota() {
+            return hourlyQuota;
+        }
+
+        public Stats getLast30DaysStats() {
+            return last30DaysStats;
+        }
+        
+    }
+
 }

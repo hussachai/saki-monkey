@@ -8,6 +8,7 @@ import java.io.Writer;
 
 import org.apache.commons.codec.Charsets;
 
+
 public class IOUtils {
 
     private static final int EOF = -1;

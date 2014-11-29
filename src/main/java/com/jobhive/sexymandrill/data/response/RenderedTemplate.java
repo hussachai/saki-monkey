@@ -22,10 +22,4 @@ public class RenderedTemplate {
         return html;
     }
     
-    public RenderedTemplate setHtml(String html) {
-        this.html = html;
-        return this;
-    }
-    
-    
 }

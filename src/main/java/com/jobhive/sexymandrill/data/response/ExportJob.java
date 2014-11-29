@@ -2,6 +2,11 @@ package com.jobhive.sexymandrill.data.response;
 
 import java.util.Date;
 
+/**
+ * 
+ * @author Hussachai
+ *
+ */
 public class ExportJob {
     
     /**
@@ -41,48 +46,24 @@ public class ExportJob {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
     public Date getCreatedAt() {
         return createdAt;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
     }
 
     public String getType() {
         return type;
     }
 
-    public void setType(String type) {
-        this.type = type;
-    }
-
     public Date getFinishedAt() {
         return finishedAt;
-    }
-
-    public void setFinishedAt(Date finishedAt) {
-        this.finishedAt = finishedAt;
     }
 
     public String getState() {
         return state;
     }
 
-    public void setState(String state) {
-        this.state = state;
-    }
-
     public String getResultUrl() {
         return resultUrl;
-    }
-
-    public void setResultUrl(String resultUrl) {
-        this.resultUrl = resultUrl;
     }
     
 }

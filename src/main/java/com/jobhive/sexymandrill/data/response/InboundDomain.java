@@ -30,24 +30,12 @@ public class InboundDomain {
         return domain;
     }
 
-    public void setDomain(String domain) {
-        this.domain = domain;
-    }
-
     public Date getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
     public Boolean getValidMx() {
         return validMx;
-    }
-
-    public void setValidMx(Boolean validMx) {
-        this.validMx = validMx;
     }
     
 }

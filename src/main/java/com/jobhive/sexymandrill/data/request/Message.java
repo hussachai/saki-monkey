@@ -1,10 +1,14 @@
-package com.jobhive.sexymandrill.data;
+package com.jobhive.sexymandrill.data.request;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.jobhive.sexymandrill.utils.Assert;
 import com.jobhive.sexymandrill.utils.Literal;
@@ -575,4 +579,473 @@ public class Message {
         return this;
     }
 
+    /**
+     * 
+     * @author Hussachai
+     *
+     */
+    public enum MergeLanguage {
+
+        MailChimp, Handlebars;
+
+        private String value;
+
+        private MergeLanguage() {
+            this.value = name().toLowerCase();
+        }
+        
+        @Override
+        public String toString() {
+            return value;
+        }
+    }
+    
+    /**
+     * 
+     * @author Hussachai
+     *
+     */
+    public static class Recipient {
+        
+        /**
+         * the email address of the recipient
+         */
+        private String email;
+
+        /**
+         * the optional display name to use for the recipient
+         */
+        private String name;
+
+        /**
+         * the header type to use for the recipient, defaults to "to" if not
+         * provided oneof(to, cc, bcc)
+         */
+        private RecipientType type = RecipientType.To;
+        
+        @JsonIgnore
+        private List<Var> vars;
+
+        public Recipient() {
+        }
+
+        public Recipient(String email, String name, RecipientType type) {
+            setEmail(email);
+            setName(name);
+            setType(type);
+        }
+
+        public Recipient(String email, String name) {
+            this(email, name, RecipientType.To);
+        }
+        
+        @Override
+        public int hashCode() {
+            final int prime = 31;
+            int result = 1;
+            result = prime * result + ((email == null) ? 0 : email.hashCode());
+            return result;
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            if (this == obj)
+                return true;
+            if (obj == null)
+                return false;
+            if (getClass() != obj.getClass())
+                return false;
+            Recipient other = (Recipient) obj;
+            if (email == null) {
+                if (other.email != null)
+                    return false;
+            } else if (!email.equals(other.email))
+                return false;
+            return true;
+        }
+
+        public String getEmail() {
+            return email;
+        }
+
+        public void setEmail(String email) {
+            this.email = email;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public Recipient setName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public RecipientType getType() {
+            return type;
+        }
+
+        public Recipient setType(RecipientType type) {
+            this.type = type;
+            return this;
+        }
+
+        public List<Var> getVars() {
+            return vars;
+        }
+
+        public Recipient setVars(List<Var> vars) {
+            this.vars = vars;
+            return this;
+        }
+
+        public Recipient addVar(Var var) {
+            Assert.notNull(var, "var");
+            if (this.vars == null) {
+                this.vars = new ArrayList<>();
+            }
+            this.vars.add(var);
+            return this;
+        }
+
+        public Recipient addVar(String name, Object content) {
+            Var var = new Var(name, content);
+            return addVar(var);
+        }
+    }
+    
+    /**
+     * 
+     * @author Hussachai
+     *
+     */
+    public static enum RecipientType {
+
+        To, CC, BCC;
+        
+        private String value;
+        
+        private RecipientType(){
+            this.value = name().toLowerCase();
+        }
+        
+        @Override
+        public String toString() {
+            return value;
+        }
+    }
+    
+    /**
+     * 
+     * @author Hussachai
+     *
+     */
+    public static class RecipientMetaData {
+
+        /**
+         * the email address of the recipient that the metadata is associated with
+         */
+        private String rcpt;
+
+        /**
+         * a map containing the recipient's unique metadata. If a key exists in both
+         * the per-recipient metadata and the global metadata, the per-recipient
+         * metadata will be used.
+         */
+        private Map<String, String> values;
+        
+        @Override
+        public int hashCode() {
+            final int prime = 31;
+            int result = 1;
+            result = prime * result + ((rcpt == null) ? 0 : rcpt.hashCode());
+            return result;
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            if (this == obj)
+                return true;
+            if (obj == null)
+                return false;
+            if (getClass() != obj.getClass())
+                return false;
+            RecipientMetaData other = (RecipientMetaData) obj;
+            if (rcpt == null) {
+                if (other.rcpt != null)
+                    return false;
+            } else if (!rcpt.equals(other.rcpt))
+                return false;
+            return true;
+        }
+
+        public String getRcpt() {
+            return rcpt;
+        }
+
+        public void setRcpt(String rcpt) {
+            this.rcpt = rcpt;
+        }
+
+        public Map<String, String> getValues() {
+            return values;
+        }
+
+        public void setValues(Map<String, String> values) {
+            this.values = values;
+        }
+
+    }
+
+    /**
+     * 
+     * @author Hussachai
+     *
+     */
+    public static class Var {
+
+        /**
+         * the merge variable's name. Merge variable names are case-insensitive and
+         * may not start with _
+         */
+        private String name;
+
+        /**
+         * the merge variable's content
+         */
+        private Object content;
+        
+        @Override
+        public int hashCode() {
+            final int prime = 31;
+            int result = 1;
+            result = prime * result + ((name == null) ? 0 : name.hashCode());
+            return result;
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            if (this == obj)
+                return true;
+            if (obj == null)
+                return false;
+            if (getClass() != obj.getClass())
+                return false;
+            Var other = (Var) obj;
+            if (name == null) {
+                if (other.name != null)
+                    return false;
+            } else if (!name.equals(other.name))
+                return false;
+            return true;
+        }
+
+        public Var(String name, Object content) {
+            setName(name);
+            setContent(content);
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public Object getContent() {
+            return content;
+        }
+
+        public void setContent(Object content) {
+            this.content = content;
+        }
+
+    }
+    
+    /**
+     * Per-recipient merge variables, which override global merge variables with the
+     * same name.
+     * 
+     * @author Hussachai
+     *
+     */
+    public static class RecipientVars {
+
+        /**
+         * the email address of the recipient that the merge variables should apply
+         * to
+         */
+        private String rcpt;
+
+        /**
+         * the recipient's merge variables
+         */
+        private List<Var> vars;
+
+        public RecipientVars(String rcpt, List<Var> vars) {
+            setRcpt(rcpt);
+            setVars(vars);
+        }
+        
+        @Override
+        public int hashCode() {
+            final int prime = 31;
+            int result = 1;
+            result = prime * result + ((rcpt == null) ? 0 : rcpt.hashCode());
+            return result;
+        }
+
+
+        @Override
+        public boolean equals(Object obj) {
+            if (this == obj)
+                return true;
+            if (obj == null)
+                return false;
+            if (getClass() != obj.getClass())
+                return false;
+            RecipientVars other = (RecipientVars) obj;
+            if (rcpt == null) {
+                if (other.rcpt != null)
+                    return false;
+            } else if (!rcpt.equals(other.rcpt))
+                return false;
+            return true;
+        }
+
+
+        public String getRcpt() {
+            return rcpt;
+        }
+
+        public void setRcpt(String rcpt) {
+            Assert.notNull(rcpt, "rcpt");
+            this.rcpt = rcpt;
+        }
+
+        public List<Var> getVars() {
+            return vars;
+        }
+
+        public void setVars(List<Var> vars) {
+            Assert.notNull(vars, "vars");
+            this.vars = vars;
+        }
+
+        public void setVars(Var... vars) {
+            setVars(new ArrayList<Var>(Arrays.asList(vars)));
+        }
+
+        public RecipientVars addVar(String name, Object content) {
+            if (this.vars == null) {
+                this.vars = new ArrayList<Var>();
+            }
+            this.vars.add(new Var(name, content));
+            return this;
+        }
+
+    }
+    
+    /**
+     * 
+     * @author Hussachai
+     *
+     */
+    public static class Attachment {
+
+        /**
+         * the MIME type of the attachment
+         */
+        private String type;
+
+        /**
+         * the file name of the attachment
+         */
+        private String name;
+
+        /**
+         * the content of the attachment as a base64-encoded string
+         */
+        private String content;
+        
+        @Override
+        public int hashCode() {
+            final int prime = 31;
+            int result = 1;
+            result = prime * result + ((name == null) ? 0 : name.hashCode());
+            return result;
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            if (this == obj)
+                return true;
+            if (obj == null)
+                return false;
+            if (getClass() != obj.getClass())
+                return false;
+            Attachment other = (Attachment) obj;
+            if (name == null) {
+                if (other.name != null)
+                    return false;
+            } else if (!name.equals(other.name))
+                return false;
+            return true;
+        }
+
+        public String getType() {
+            return type;
+        }
+
+        public void setType(String type) {
+            this.type = type;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getContent() {
+            return content;
+        }
+
+        public void setContent(String content) {
+            this.content = content;
+        }
+
+    }
+    
+    /**
+     * 
+     * @author Hussachai
+     *
+     */
+    public static class EmbeddedImage extends Attachment {
+
+        /**
+         * the MIME type of the image - must start with "image/"
+         */
+        @Override
+        public void setType(String type) {
+            if (type == null || !type.toLowerCase().startsWith("image/")) {
+                throw new IllegalArgumentException("type must start with 'image/'");
+            }
+            super.setType(type);
+        }
+
+        /**
+         * the Content ID of the image - use <img src="cid:THIS_VALUE"> to reference
+         * the image in your HTML content
+         */
+        @Override
+        public void setName(String name) {
+            super.setName(name);
+        }
+
+    }
 }

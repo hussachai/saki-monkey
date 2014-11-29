@@ -1,99 +1,99 @@
-package com.jobhive.sexymandrill.data;
+package com.jobhive.sexymandrill.data.response;
 
 /**
  * 
  * @author Hussachai
  *
  */
-public class SummaryInfo {
+public abstract class Stats {
     
     /**
      * the total number of messages sent
      */
-    private int sent;
+    private Integer sent;
 
     /**
      * the number of emails hard bounced
      */
-    private int hardBounces;
+    private Integer hardBounces;
 
     /**
      * the number of emails soft bounced
      */
-    private int softBounces;
-
+    private Integer softBounces;
+    
     /**
      * the number of emails rejected for sending
      */
-    private int rejects;
+    private Integer rejects;
 
     /**
      * the number of spam complaints
      */
-    private int complaints;
+    private Integer complaints;
 
     /**
      * the number of unsubscribes
      */
-    private int unsubs;
+    private Integer unsubs;
 
     /**
      * the number of times emails have been opened
      */
-    private int opens;
+    private Integer opens;
 
     /**
      * the number of URLs that have been clicked
      */
-    private int clicks;
+    private Integer clicks;
 
     /**
      * the number of unique opens for emails sent 
      */
-    private int uniqueOpens;
+    private Integer uniqueOpens;
 
     /**
      * the number of unique clicks for emails sent
      */
-    private int uniqueClicks;
+    private Integer uniqueClicks;
 
-    public int getSent() {
+    public Integer getSent() {
         return sent;
     }
 
-    public int getHardBounces() {
+    public Integer getHardBounces() {
         return hardBounces;
     }
 
-    public int getSoftBounces() {
+    public Integer getSoftBounces() {
         return softBounces;
     }
 
-    public int getRejects() {
+    public Integer getRejects() {
         return rejects;
     }
 
-    public int getComplaints() {
+    public Integer getComplaints() {
         return complaints;
     }
 
-    public int getUnsubs() {
+    public Integer getUnsubs() {
         return unsubs;
     }
 
-    public int getOpens() {
+    public Integer getOpens() {
         return opens;
     }
 
-    public int getClicks() {
+    public Integer getClicks() {
         return clicks;
     }
 
-    public int getUniqueOpens() {
+    public Integer getUniqueOpens() {
         return uniqueOpens;
     }
 
-    public int getUniqueClicks() {
+    public Integer getUniqueClicks() {
         return uniqueClicks;
     }
 

@@ -9,7 +9,6 @@ import com.jobhive.sexymandrill.MandrillAsyncClient;
 import com.jobhive.sexymandrill.api.async.callback.ObjectResponseCallback;
 import com.jobhive.sexymandrill.data.response.DedicatedIp;
 import com.jobhive.sexymandrill.data.response.DedicatedIpPool;
-import com.jobhive.sexymandrill.utils.Assert;
 
 /**
  * 
@@ -40,8 +39,8 @@ public class IpAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> info(String ip,
             ObjectResponseCallback<DedicatedIp> callback) {
-        Assert.notEmpty(ip, "ip");
-        return getClient().execute("/ips/info.json", mapParams("ip", ip), callback);
+        return getClient().execute("/ips/info.json", 
+                mapParams("ip", ip), callback);
     }
     
     /**
@@ -70,7 +69,6 @@ public class IpAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> startWarmup(String ip,
             ObjectResponseCallback<DedicatedIp> callback) {
-        Assert.notEmpty(ip, "ip");
         return getClient().execute("/ips/start-warmup.json", 
                 mapParams("ip", ip), callback);
     }
@@ -83,7 +81,6 @@ public class IpAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> cancelWarmup(String ip,
             ObjectResponseCallback<DedicatedIp> callback) {
-        Assert.notEmpty(ip, "ip");
         return getClient().execute("/ips/cancel-warmup.json", 
                 mapParams("ip", ip), callback);
     }
@@ -99,8 +96,6 @@ public class IpAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> setPool(String ip, String pool, Boolean createPool,
             ObjectResponseCallback<DedicatedIp> callback) {
-        Assert.notEmpty(ip, "ip");
-        Assert.notEmpty(pool, "pool");
         Map<String, Object> params = mapParams("ip", ip)
                 .p("pool", pool).p("create_pool", createPool);
         return getClient().execute("/ips/set-pool.json", params, callback);
@@ -114,7 +109,6 @@ public class IpAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> delete(String ip,
             ObjectResponseCallback<DedicatedIp.IpDeleteStatus> callback) {
-        Assert.notEmpty(ip, "ip");
         return getClient().execute("/ips/delete.json", 
                 mapParams("ip", ip), callback);
     }
@@ -136,7 +130,6 @@ public class IpAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> poolInfo(String pool, 
             ObjectResponseCallback<DedicatedIpPool> callback) {
-        Assert.notEmpty(pool, "pool name");
         return getClient().execute("/ips/pool-info.json", 
                 mapParams("pool", pool), callback);
     }
@@ -150,7 +143,6 @@ public class IpAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> createPool(String pool, 
             ObjectResponseCallback<DedicatedIpPool> callback) {
-        Assert.notEmpty(pool, "pool name");
         return getClient().execute("/ips/create-pool.json", 
                 mapParams("pool", pool), callback);
     }
@@ -164,7 +156,6 @@ public class IpAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> deletePool(String pool, 
             ObjectResponseCallback<DedicatedIpPool.PoolDeleteStatus> callback) {
-        Assert.notEmpty(pool, "pool name");
         return getClient().execute("/ips/delete-pool.json", 
                 mapParams("pool", pool), callback);
     }
@@ -179,8 +170,6 @@ public class IpAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> checkCustomDns(String ip, String domain, 
             ObjectResponseCallback<DedicatedIp.CustomDnsStatus> callback) {
-        Assert.notEmpty(ip, "ip");
-        Assert.notEmpty(domain, "domain");
         Map<String, Object> params = mapParams("ip", ip).p("domain", domain);
         return getClient().execute("/ips/check-custom-dns.json", params, callback);
     }
@@ -194,8 +183,6 @@ public class IpAsyncApi extends MandrillAsyncApi {
      */
     public Future<HttpResponse> setCustomDns(String ip, String domain, 
             ObjectResponseCallback<DedicatedIp> callback) {
-        Assert.notEmpty(ip, "ip");
-        Assert.notEmpty(domain, "domain");
         Map<String, Object> params = mapParams("ip", ip).p("domain", domain);
         return getClient().execute("/ips/set-custom-dns.json", params, callback);
     }

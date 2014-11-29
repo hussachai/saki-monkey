@@ -1,47 +1,109 @@
 package com.jobhive.sexymandrill.data.response;
 
 import java.util.Date;
-import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.jobhive.sexymandrill.Defaults;
 
+/**
+ * 
+ * @author Hussachai
+ *
+ */
 public class Template {
     
+    /**
+     * the immutable unique code name of the template
+     */
     private String slug;
     
+    /**
+     * the name of the template
+     */
     private String name;
     
-    private List<String> labels;
+    /**
+     * the list of labels applied to the template
+     */
+    private String[] labels;
     
+    /**
+     * the full HTML code of the template, 
+     * with mc:edit attributes marking the editable 
+     * elements - draft version
+     */
     private String code;
     
+    /**
+     * the subject line of the template, if provided - draft version
+     */
     private String subject;
     
+    /**
+     * the default sender address for the template, if provided - draft version
+     */
     private String fromEmail;
     
+    /**
+     * the default sender from name for the template, if provided - draft version
+     */
     private String fromName;
     
+    /**
+     * the default text part of messages sent with the template, if provided - draft version
+     */
     private String text;
     
+    /**
+     * the same as the template name - kept as a separate field for backwards compatibility
+     */
     private String publishName;
     
+    /**
+     * the full HTML code of the template, with mc:edit attributes marking the editable 
+     * elements that are available as published, if it has been published
+     */
     private String publishCode;
     
+    /**
+     * the subject line of the template, if provided
+     */
     private String publishSubject;
     
+    /**
+     * the default sender address for the template, if provided
+     */
     private String publishFromEmail;
     
+    /**
+     * the default sender from name for the template, if provided
+     */
     private String publishFromName;
     
+    /**
+     * the default text part of messages sent with the template, if provided
+     */
     private String publishText;
     
+    /**
+     * the date and time the template was last published as 
+     * a UTC string in YYYY-MM-DD HH:MM:SS format, or null 
+     * if it has not been published
+     */
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Defaults.DATETIME_FORMAT, timezone = Defaults.TIME_ZONE)
     private Date publishedAt;
     
+    /**
+     * the date and time the template was first created as 
+     * a UTC string in YYYY-MM-DD HH:MM:SS format
+     */
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Defaults.DATETIME_FORMAT, timezone = Defaults.TIME_ZONE)
     private Date createdAt;
     
+    /**
+     * the date and time the template was last modified as 
+     * a UTC string in YYYY-MM-DD HH:MM:SS format
+     */
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Defaults.DATETIME_FORMAT, timezone = Defaults.TIME_ZONE)
     private Date updatedAt;
 
@@ -49,153 +111,67 @@ public class Template {
         return slug;
     }
 
-    public Template setSlug(String slug) {
-        this.slug = slug;
-        return this;
-    }
-
     public String getName() {
         return name;
     }
 
-    public Template setName(String name) {
-        this.name = name;
-        return this;
-    }
-
-    public List<String> getLabels() {
+    public String[] getLabels() {
         return labels;
-    }
-
-    public Template setLabels(List<String> labels) {
-        this.labels = labels;
-        return this;
     }
 
     public String getCode() {
         return code;
     }
 
-    public Template setCode(String code) {
-        this.code = code;
-        return this;
-    }
-
     public String getSubject() {
         return subject;
-    }
-
-    public Template setSubject(String subject) {
-        this.subject = subject;
-        return this;
     }
 
     public String getFromEmail() {
         return fromEmail;
     }
 
-    public Template setFromEmail(String fromEmail) {
-        this.fromEmail = fromEmail;
-        return this;
-    }
-
     public String getFromName() {
         return fromName;
-    }
-
-    public Template setFromName(String fromName) {
-        this.fromName = fromName;
-        return this;
     }
 
     public String getText() {
         return text;
     }
 
-    public Template setText(String text) {
-        this.text = text;
-        return this;
-    }
-
     public String getPublishName() {
         return publishName;
-    }
-
-    public Template setPublishName(String publishName) {
-        this.publishName = publishName;
-        return this;
     }
 
     public String getPublishCode() {
         return publishCode;
     }
 
-    public Template setPublishCode(String publishCode) {
-        this.publishCode = publishCode;
-        return this;
-    }
-
     public String getPublishSubject() {
         return publishSubject;
-    }
-
-    public Template setPublishSubject(String publishSubject) {
-        this.publishSubject = publishSubject;
-        return this;
     }
 
     public String getPublishFromEmail() {
         return publishFromEmail;
     }
 
-    public Template setPublishFromEmail(String publishFromEmail) {
-        this.publishFromEmail = publishFromEmail;
-        return this;
-    }
-
     public String getPublishFromName() {
         return publishFromName;
-    }
-
-    public Template setPublishFromName(String publishFromName) {
-        this.publishFromName = publishFromName;
-        return this;
     }
 
     public String getPublishText() {
         return publishText;
     }
 
-    public Template setPublishText(String publishText) {
-        this.publishText = publishText;
-        return this;
-    }
-
     public Date getPublishedAt() {
         return publishedAt;
-    }
-
-    public Template setPublishedAt(Date publishedAt) {
-        this.publishedAt = publishedAt;
-        return this;
     }
 
     public Date getCreatedAt() {
         return createdAt;
     }
 
-    public Template setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-        return this;
-    }
-
     public Date getUpdatedAt() {
         return updatedAt;
     }
-
-    public Template setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
-        return this;
-    }
-    
 }
