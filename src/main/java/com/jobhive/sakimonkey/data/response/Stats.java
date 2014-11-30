@@ -5,7 +5,7 @@ package com.jobhive.sakimonkey.data.response;
  * @author Hussachai
  *
  */
-public abstract class Stats {
+public class Stats {
     
     /**
      * the total number of messages sent

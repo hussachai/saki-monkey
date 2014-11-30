@@ -24,6 +24,10 @@ public class SenderInfo extends Stats {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Defaults.DATETIME_FORMAT, timezone = Defaults.TIME_ZONE)
     private Date createdAt;
     
+    @Override
+    public String toString(){
+        return address;
+    }
     private Integer reputation;
 
     public String getAddress() {

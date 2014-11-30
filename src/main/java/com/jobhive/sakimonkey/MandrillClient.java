@@ -90,7 +90,11 @@ public class MandrillClient extends AbstractMandrillClient {
     
     @Override
     public void shutdown() {
-       
+       try {
+        httpClient.close();
+    } catch (IOException e) {
+        throw new IORuntimeException(e);
+    }
     }
     
     protected CloseableHttpClient createHttpClient(){

@@ -39,7 +39,7 @@ public class JsonHttpFutureCallback implements FutureCallback<HttpResponse> {
                 object = readError(in, errorType);
                 callback.completed(object, true);
             }
-        } catch (IllegalStateException | IOException e) {
+        } catch (Exception e) {
             failed(e);
         }
     }

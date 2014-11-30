@@ -6,6 +6,7 @@ import java.lang.reflect.Type;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.jobhive.sakimonkey.data.Result;
 import com.jobhive.sakimonkey.data.response.ErrorInfo;
 
 /**
@@ -31,26 +32,25 @@ public abstract class ObjectResponseCallback<T> {
         return ErrorInfo.class;
     }
     
-    public abstract void onSuccess(T object);
-    
-    public void onError(ErrorInfo error){
-        log.error("Error code: {} message: {}", 
-                error.getCode(), error.getMessage());
-    }
+    public abstract void onSuccess(Result<T> result);
     
     public void onFailure(Exception e) {
         log.error(e.getMessage(), e);
     }
-
+    
     @SuppressWarnings("unchecked")
     public void completed(Object object, boolean isError) {
+        Result<T> result = null;
         if (isError) {
-            log.info("Got error: {}", object);
-            onError((ErrorInfo) object);
+            ErrorInfo error = (ErrorInfo)object;
+            log.error("Error code: {} message: {}", 
+                    error.getCode(), error.getMessage());
+            result = new Result<>(error);
         } else {
             log.info("Recieved: {}", object);
-            onSuccess((T) object);
+            result = new Result<>((T)object);
         }
+        onSuccess(result);
     }
 
 }
