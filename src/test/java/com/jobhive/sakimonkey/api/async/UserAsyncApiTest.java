@@ -2,22 +2,28 @@ package com.jobhive.sakimonkey.api.async;
 
 import org.junit.Test;
 
-import com.jobhive.sakimonkey.api.async.callback.ObjectResponseCallback;
 import com.jobhive.sakimonkey.data.Result;
 import com.jobhive.sakimonkey.data.response.SenderInfo;
 import com.jobhive.sakimonkey.data.response.UserInfo;
 import com.jobhive.sakimonkey.test.BaseAsyncApiTest;
 import com.jobhive.sakimonkey.test.asserts.UserApiAssert;
 
+/**
+ * 
+ * @author Hussachai
+ *
+ */
 public class UserAsyncApiTest extends BaseAsyncApiTest {
-
-    private UserAsyncApi api = client.api().users();
+    
+    private UserAsyncApi api(){
+        return client.api().users();
+    }
     
     @Test
     public void testPing(){
-        wait(api.ping(new ObjectResponseCallback<String>() {
+        wait(api().ping(new TestCallback<String>() {
             @Override
-            public void onSuccess(Result<String> result) {
+            public void willTest(Result<String> result) {
                 UserApiAssert.assertPing(result);
             }
         }));
@@ -25,9 +31,9 @@ public class UserAsyncApiTest extends BaseAsyncApiTest {
     
     @Test
     public void testInfo(){
-        wait(api.info(new ObjectResponseCallback<UserInfo>() {
+        wait(api().info(new TestCallback<UserInfo>() {
             @Override
-            public void onSuccess(Result<UserInfo> result) {
+            public void willTest(Result<UserInfo> result) {
                 UserApiAssert.assertInfo(result);
             }
         }));
@@ -35,9 +41,9 @@ public class UserAsyncApiTest extends BaseAsyncApiTest {
     
     @Test
     public void testSenders(){
-        wait(api.senders(new ObjectResponseCallback<SenderInfo[]>() {
+        wait(api().senders(new TestCallback<SenderInfo[]>() {
             @Override
-            public void onSuccess(Result<SenderInfo[]> result) {
+            public void willTest(Result<SenderInfo[]> result) {
                 UserApiAssert.assertSenders(result);
             }
         }));

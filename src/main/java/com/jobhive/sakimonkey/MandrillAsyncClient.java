@@ -13,7 +13,7 @@ import org.apache.http.entity.ContentType;
 import org.apache.http.impl.nio.client.CloseableHttpAsyncClient;
 import org.apache.http.impl.nio.client.HttpAsyncClientBuilder;
 import org.apache.http.impl.nio.client.HttpAsyncClients;
-import org.apache.http.nio.conn.SchemeIOSessionStrategy;
+import org.apache.http.nio.conn.NHttpClientConnectionManager;
 import org.apache.http.nio.conn.ssl.SSLIOSessionStrategy;
 import org.apache.http.nio.entity.NStringEntity;
 
@@ -25,22 +25,23 @@ import com.jobhive.sakimonkey.api.async.callback.ObjectResponseCallback;
  * @author Hussachai
  *
  */
-public class MandrillAsyncClient extends AbstractMandrillClient{
-    
+public class MandrillAsyncClient extends AbstractMandrillClient {
+
     private CloseableHttpAsyncClient httpAsyncClient;
 
     private AsyncApiCollections apiCollections;
-    
-    public MandrillAsyncClient() {}
-    
+
+    public MandrillAsyncClient() {
+    }
+
     public MandrillAsyncClient(MandrillContext context) {
         super(context);
     }
-    
+
     public MandrillAsyncClient(String apiKey, String configPath) {
         super(apiKey, configPath);
     }
-    
+
     /**
      * 
      * @return
@@ -48,7 +49,7 @@ public class MandrillAsyncClient extends AbstractMandrillClient{
     public AsyncApiCollections api() {
         return apiCollections;
     }
-    
+
     /**
      * 
      * @param path
@@ -60,7 +61,8 @@ public class MandrillAsyncClient extends AbstractMandrillClient{
             FutureCallback<HttpResponse> futureCallback) {
         HttpPost post = new HttpPost(getContext().getApiUrl(path));
         String data = convertParamsToJson(params);
-        NStringEntity entity = new NStringEntity(data, ContentType.APPLICATION_JSON);
+        NStringEntity entity = new NStringEntity(data,
+                ContentType.APPLICATION_JSON);
         post.setEntity(entity);
         Future<HttpResponse> future = httpAsyncClient.execute(post,
                 futureCallback);
@@ -76,17 +78,17 @@ public class MandrillAsyncClient extends AbstractMandrillClient{
      */
     public Future<HttpResponse> execute(String path, Object params,
             ObjectResponseCallback<?> callback) {
-        return execute(path, params, new JsonHttpFutureCallback(
-                getContext().getObjectMapper(), callback));
+        return execute(path, params, new JsonHttpFutureCallback(getContext()
+                .getObjectMapper(), callback));
     }
-    
+
     @Override
-    protected void init(){
+    protected void init() {
         this.httpAsyncClient = createHttpAsyncClient();
         this.httpAsyncClient.start();
         this.apiCollections = new AsyncApiCollections(this);
     }
-    
+
     @Override
     public void shutdown() {
         try {
@@ -95,23 +97,42 @@ public class MandrillAsyncClient extends AbstractMandrillClient{
             log.error(e.getMessage(), e);
         }
     }
-    
+
     /**
      * Factory method for Apache HttpAsyncClient
+     * 
      * @return
      */
     protected CloseableHttpAsyncClient createHttpAsyncClient() {
-        
+
+        log.info("Creating HttpAsyncClient");
         HttpAsyncClientBuilder clientBuilder = HttpAsyncClients.custom();
-        clientBuilder.setSSLStrategy(createSchemeIOSessionStrategy());
+        
+        clientBuilder.setSSLStrategy(createSSLIOSessionStrategy());
+        
+        /*
+         * defaultMaxPerRoute and maxTotal will be overridden by connection manager
+         * if it is set.
+         */
+        ConnectionSettings connSettings = createConnectionSettings();
+        clientBuilder.setConnectionManagerShared(connSettings.shared);
+        clientBuilder.setMaxConnPerRoute(connSettings.defaultMaxPerRoute);
+        clientBuilder.setMaxConnTotal(connSettings.maxTotal);
+        
+        NHttpClientConnectionManager connectionManager = createConnectionManager();
+        if(connectionManager != null){
+            log.info("Connection manager is set");
+            clientBuilder.setConnectionManager(connectionManager);
+        }
+        
         HttpHost proxy = detectHttpProxy();
-        if(proxy != null){
-            
+        if (proxy != null) {
+
             clientBuilder.setProxy(proxy);
-            
+
             CredentialsProvider credsProvider = createDefaultCredentialsProvider(
                     proxy.getHostName(), proxy.getPort());
-            if(credsProvider != null){
+            if (credsProvider != null) {
                 clientBuilder.setDefaultCredentialsProvider(credsProvider);
             }
         }
@@ -123,12 +144,19 @@ public class MandrillAsyncClient extends AbstractMandrillClient{
     }
     
     /**
-     * 
+     * Implement this to override connection manager settings
      * @return
      */
-    protected SchemeIOSessionStrategy createSchemeIOSessionStrategy(){
-        
-        return new SSLIOSessionStrategy(
-                SSLContexts.createDefault(), createHostnameVerifier());
+    protected NHttpClientConnectionManager createConnectionManager() {
+        return null;
+    }
+    
+    /**
+     * This SSLIOSessionStategy can be overridden by createConnectionManager 
+     * @return
+     */
+    protected SSLIOSessionStrategy createSSLIOSessionStrategy(){
+        return new SSLIOSessionStrategy(SSLContexts.createDefault(), 
+                createHostnameVerifier());
     }
 }

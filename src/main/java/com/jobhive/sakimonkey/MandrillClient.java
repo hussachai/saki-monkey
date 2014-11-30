@@ -7,6 +7,7 @@ import org.apache.http.HttpHost;
 import org.apache.http.client.CredentialsProvider;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.conn.HttpClientConnectionManager;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.conn.ssl.SSLContextBuilder;
 import org.apache.http.conn.ssl.TrustSelfSignedStrategy;
@@ -91,16 +92,30 @@ public class MandrillClient extends AbstractMandrillClient {
     @Override
     public void shutdown() {
        try {
-        httpClient.close();
-    } catch (IOException e) {
-        throw new IORuntimeException(e);
-    }
+           httpClient.close();
+        } catch (IOException e) {
+            throw new IORuntimeException(e);
+        }
     }
     
     protected CloseableHttpClient createHttpClient(){
         
+        log.info("Creating HttpClient");
+        
         HttpClientBuilder clientBuilder = HttpClients.custom();
         clientBuilder.setSSLSocketFactory(createSSLConnectionSocketFactory());
+        
+        ConnectionSettings connSettings = createConnectionSettings();
+        clientBuilder.setConnectionManagerShared(connSettings.shared);
+        clientBuilder.setMaxConnPerRoute(connSettings.defaultMaxPerRoute);
+        clientBuilder.setMaxConnTotal(connSettings.maxTotal);
+        
+        HttpClientConnectionManager connectionManager = createConnectionManager();
+        if(connectionManager != null){
+            log.info("Connection manager is set");
+            clientBuilder.setConnectionManager(connectionManager);
+        }
+        
         HttpHost proxy = detectHttpProxy();
         if(proxy != null){
             
@@ -117,6 +132,10 @@ public class MandrillClient extends AbstractMandrillClient {
         clientBuilder.setUserAgent(userAgent);
         clientBuilder.setDefaultRequestConfig(createDefaultRequestConfig());
         return clientBuilder.build();
+    }
+    
+    protected HttpClientConnectionManager createConnectionManager(){
+        return null;
     }
     
     protected SSLConnectionSocketFactory createSSLConnectionSocketFactory() {

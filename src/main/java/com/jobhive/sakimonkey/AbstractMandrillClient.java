@@ -91,9 +91,11 @@ public abstract class AbstractMandrillClient {
     }
     
     protected HttpHost detectHttpProxy(){
-        if(config.hasPath("httpClient.proxy.host")){
+        if(config.getBoolean("httpClient.proxy.enabled")){
+            log.info("Proxy is set");
             String host = config.getString("httpClient.proxy.host");
             int port = config.getInt("httpClient.proxy.port");
+            log.info("Using proxy host='{}', port={}", host, port);
             return new HttpHost(host, port);
         }
         List<Proxy> proxies = null;
@@ -105,6 +107,8 @@ public abstract class AbstractMandrillClient {
             for(Proxy proxy: proxies){
                 InetSocketAddress addr = (InetSocketAddress) proxy.address();
                 if(addr != null){
+                    log.info("System detects proxy( host='{}', port={} )",
+                            addr.getHostName(), addr.getPort());
                     return new HttpHost(addr.getHostName(), addr.getPort());
                 }
             }
@@ -124,6 +128,7 @@ public abstract class AbstractMandrillClient {
         if(!config.hasPath("httpClient.proxy.username")){
             return null;
         }
+        log.info("Proxy authentication information is provided");
         String username = config.getString("httpClient.proxy.username");
         String password = config.getString("httpClient.proxy.password");
         CredentialsProvider credsProvider = new BasicCredentialsProvider();
@@ -135,11 +140,43 @@ public abstract class AbstractMandrillClient {
     
     protected RequestConfig createDefaultRequestConfig(){
         Builder configBuilder = RequestConfig.custom();
-        configBuilder.setSocketTimeout(config.getInt("httpClient.request.socketTimeout"));
-        configBuilder.setConnectTimeout(config.getInt("httpClient.request.connectTimeout"));
-        configBuilder.setConnectionRequestTimeout(
-                config.getInt("httpClient.request.connectionRequestTimeout"));
+        int socketTimeout = config.getInt("httpClient.request.socketTimeout");
+        int connTimeout = config.getInt("httpClient.request.connectTimeout");
+        int connReqTimeout = config.getInt("httpClient.request.connectionRequestTimeout");
+        log.info("Defeault request timeout: \n"
+                + "\tsocketTimeout = {}\n"
+                + "\tconnectionTimeout = {}\n"
+                + "\tconnectionRequestTimeout = {}", 
+                socketTimeout, connTimeout, connReqTimeout);
+        configBuilder.setSocketTimeout(socketTimeout);
+        configBuilder.setConnectTimeout(connTimeout);
+        configBuilder.setConnectionRequestTimeout(connReqTimeout);
         return configBuilder.build();
     }
+    
+    protected ConnectionSettings createConnectionSettings(){
+        ConnectionSettings s = new ConnectionSettings();
+        s.shared = config.getBoolean("httpClient.connection.shared");
+        s.defaultMaxPerRoute = config.getInt("httpClient.connection.defaultMaxPerRoute");
+        s.maxTotal = config.getInt("httpClient.connection.maxTotal");
+        log.info("Default connection settings: \n"
+                + "\tshared = {}\n"
+                + "\tdefaultMaxPerRoute = {}\n"
+                + "\tmaxTotal = {}",
+                s.shared, s.defaultMaxPerRoute, s.maxTotal);
+        if(s.shared){
+            log.info("!!! Connection Manager is set to shared !!!");
+            log.info("Client is responsible for managing the connection"
+                    + "and shutdown method has no effect on connection.");
+        }
+        return s;
+    }
+    
+    protected class ConnectionSettings{
+        boolean shared;
+        int defaultMaxPerRoute;
+        int maxTotal;
+    }
+    
     
 }
