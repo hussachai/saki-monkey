@@ -30,7 +30,8 @@ be a good idea when they are not designed for that purpose in the first place.
 Saki-Monkey is available on Maven Central
 
 ###SNAPSHOT for Maven 
-```Maven POM
+
+```Xml
 <repositories>
   <repository>
     <id>sonatype-nexus-snapshots</id>
@@ -57,6 +58,7 @@ Saki-Monkey is available on Maven Central
 ```
 
 ###SNAPSHOT for sbt 
+
 ```Scala
 resolvers += "Sonatype Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots/"
 
