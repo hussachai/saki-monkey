@@ -1,6 +1,6 @@
 package com.jobhive.sakimonkey.api.async;
 
-import org.junit.Test;
+import org.testng.annotations.Test;
 
 import com.jobhive.sakimonkey.data.Result;
 import com.jobhive.sakimonkey.data.response.SenderInfo;

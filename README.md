@@ -1,5 +1,5 @@
 
-Saki Money - Asynchronous Type-safety Restful Client for Mandrill API
+Saki Monkey - Asynchronous Type-safety Restful Client for Mandrill API
 ======
 Mandrill API [Document Page](https://mandrillapp.com/api/docs/)
 
@@ -22,12 +22,47 @@ be a good idea when they are not designed for that purpose in the first place.
 - Strong type support. You don't have to worry about type and casting.
 - Intuitive and concise API. You will feel natural like sitting beside Saki-Monkey in 
   the jungle when you're coding
-- Proxy support  
+- Proxy support
 - Configurable client but doesn't require extra configuration except you don't want 
   the default one.
-  
-  
-                    ================================================
+
+##Set up your project dependencies
+Saki-Monkey is available on Maven Central
+
+###SNAPSHOT for Maven 
+```
+<repositories>
+  <repository>
+    <id>sonatype-nexus-snapshots</id>
+    <name>Sonatype Nexus Snapshots</name>
+    <url>
+      https://oss.sonatype.org/content/repositories/snapshots
+    </url>
+    <releases>
+      <enabled>false</enabled>
+    </releases>
+    <snapshots>
+      <enabled>true</enabled>
+    </snapshots>
+  </repository>
+</repositories>
+
+<dependencies>
+  <dependency>
+    <groupId>com.jobhive.saki-monkey</groupId>
+    <artifactId>saki-monkey</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+  </dependency>
+</dependencies>
+```
+###SNAPSHOT for sbt 
+```
+resolvers += "Sonatype Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots/"
+
+libraryDependencies += "com.jobhive.saki-monkey" % "saki-monkey" % "1.0.0-SNAPSHOT"
+```
+
+                      ================================================
                  _____       _    _        __  __             _              
                 / ____|     | |  (_)      |  \/  |           | |             
                | (___   __ _| | ___ ______| \  / | ___  _ __ | | _____ _   _ 

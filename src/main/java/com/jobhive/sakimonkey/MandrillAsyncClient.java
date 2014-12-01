@@ -44,7 +44,7 @@ public class MandrillAsyncClient extends AbstractMandrillClient {
 
     /**
      * 
-     * @return
+     * @return AsyncApiCollection
      */
     public AsyncApiCollections api() {
         return apiCollections;

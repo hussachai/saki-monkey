@@ -126,15 +126,15 @@ public abstract class AbstractMandrillApi<T extends AbstractMandrillClient> {
         this.client = client;
     }
     
-    public T getClient() {
+    protected T getClient() {
         return client;
     }
     
-    public MandrillContext getContext() {
+    protected MandrillContext getContext() {
         return client.getContext();
     }
     
-    public FluentMap<String, Object> mapParams(String key, Object value){
+    protected FluentMap<String, Object> mapParams(String key, Object value){
         FluentMap<String, Object> map = new FluentMap<>();
         map.put("key", getContext().getApiKey());
         map.put(key, value);

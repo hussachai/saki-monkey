@@ -10,3 +10,5 @@
 /src/test/resources/credential.conf
 /src/test/java/*.java
 
+/test-output
+

@@ -2,6 +2,9 @@ package com.jobhive.sakimonkey.data.response;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.jobhive.sakimonkey.Defaults;
+
 /**
  * 
  * @author Hussachai
@@ -18,6 +21,7 @@ public class InboundDomain {
      * the date and time that the inbound domain was added as 
      * a UTC string in YYYY-MM-DD HH:MM:SS format
      */
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Defaults.DATETIME_FORMAT, timezone = Defaults.TIME_ZONE)
     private Date createdAt;
     
     /**
@@ -26,6 +30,11 @@ public class InboundDomain {
      */
     private Boolean validMx;
 
+    @Override
+    public String toString(){
+        return domain;
+    }
+    
     public String getDomain() {
         return domain;
     }

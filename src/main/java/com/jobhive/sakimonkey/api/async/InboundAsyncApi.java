@@ -82,15 +82,7 @@ public class InboundAsyncApi extends MandrillAsyncApi {
         return getClient().execute(INBOUND_ROUTES, 
                 mapParams("domain", domain), callback);
     }
-    
-    /**
-     * 
-     * @param callback
-     * @return
-     */
-    public Future<HttpResponse> routes(ObjectResponseCallback<InboundRoute[]> callback) {
-        return routes(null, callback);
-    }
+
     
     /**
      * Add a new mailbox route to an inbound domain

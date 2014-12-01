@@ -1,10 +1,10 @@
 package com.jobhive.sakimonkey.test;
 
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.rules.TestName;
+import java.lang.reflect.Method;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.testng.annotations.BeforeMethod;
 
 public abstract class BaseApiTest {
 
@@ -12,12 +12,10 @@ public abstract class BaseApiTest {
     
     protected final String className = getClass().getSimpleName();
     
-    @Rule public TestName name = new TestName();
-    
-    @Before
-    public void beforeTest(){
+    @BeforeMethod
+    public void beforeTest(Method method){
         System.out.println("====================================");
-        System.out.println("[TEST: "+ className + "." + name.getMethodName()+"]");
+        System.out.println("[TEST: "+ className + "." + method.getName()+"]");
     }
     
 }

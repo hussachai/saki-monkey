@@ -1,37 +1,43 @@
 package com.jobhive.sakimonkey.test.asserts;
 
-import org.junit.Assert;
+import org.testng.Assert;
 
 import com.jobhive.sakimonkey.data.Result;
 import com.jobhive.sakimonkey.data.response.SenderInfo;
 import com.jobhive.sakimonkey.data.response.UserInfo;
 
+/**
+ * 
+ * @author Hussachai
+ *
+ */
 public final class UserApiAssert extends BaseAssert{
 
-    public static void assertPing(Result<String> result){
-        Assert.assertNotNull(result);
-        Assert.assertFalse(result.isError());
-        Assert.assertNull(result.getErrorInfo());
+    public static String assertPing(Result<String> result){
+        assertResult(result);
         Assert.assertEquals("PONG!", result.getObject());
+        return result.getObject();
     }
     
-    public static void assertInfo(Result<UserInfo> result){
+    public static UserInfo assertInfo(Result<UserInfo> result){
+        assertResult(result);
         UserInfo userInfo = result.getObject();
-        Assert.assertNotNull(userInfo);
         Assert.assertNotNull(userInfo.getUsername());
         println("Username: " + userInfo.getUsername());
         println("Created At: "+userInfo.getCreatedAt());
         Assert.assertTrue(userInfo.getReputation() > 0);
         println(userInfo.getStats().keySet());//TODO: maybe we want strong type here
+        return userInfo;
     }
     
-    public static void assertSenders(Result<SenderInfo[]> result){
+    public static SenderInfo[] assertSenders(Result<SenderInfo[]> result){
+        assertResult(result);
         SenderInfo senders[] = result.getObject();
-        println(senders);
         Assert.assertNotNull(senders);
         if(senders.length > 0){
             Assert.assertNotNull(senders[0].getAddress());
             Assert.assertNotNull(senders[0].getCreatedAt());
         }
+        return senders;
     }
 }

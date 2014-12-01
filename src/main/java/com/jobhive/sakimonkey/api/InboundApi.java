@@ -71,14 +71,6 @@ public class InboundApi extends MandrillApi {
     }
     
     /**
-     * 
-     * @return
-     */
-    public Result<InboundRoute[]> routes() {
-        return routes(null);
-    }
-    
-    /**
      * Add a new mailbox route to an inbound domain
      * 
      * @param domain an existing inbound domain

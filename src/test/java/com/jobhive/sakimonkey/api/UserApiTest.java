@@ -1,6 +1,6 @@
 package com.jobhive.sakimonkey.api;
 
-import org.junit.Test;
+import org.testng.annotations.Test;
 
 import com.jobhive.sakimonkey.test.BaseSyncApiTest;
 import com.jobhive.sakimonkey.test.asserts.UserApiAssert;

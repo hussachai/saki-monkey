@@ -25,6 +25,14 @@ public class Result<T> {
         this.errorInfo = errorInfo;
     }
     
+    @Override
+    public String toString(){
+        if(error){
+            return errorInfo.getMessage();
+        }
+        return object.toString();
+    }
+    
     public T getObject() {
         return object;
     }

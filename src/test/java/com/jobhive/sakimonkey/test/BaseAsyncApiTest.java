@@ -1,11 +1,12 @@
 package com.jobhive.sakimonkey.test;
 
+import java.lang.reflect.Method;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
 import org.apache.http.HttpResponse;
-import org.junit.After;
-import org.junit.Before;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 
 import com.jobhive.sakimonkey.MandrillAsyncClient;
 import com.jobhive.sakimonkey.api.async.callback.ObjectResponseCallback;
@@ -25,14 +26,14 @@ public abstract class BaseAsyncApiTest extends BaseApiTest {
     
     protected Throwable error;
     
-    @Before
-    public void beforeTest(){
-        super.beforeTest();
+    @BeforeMethod
+    public void beforeTest(Method method){
+        super.beforeTest(method);
         client = new MandrillAsyncClient();
         error = null;
     }
     
-    @After
+    @AfterMethod
     public void afterTest() throws Throwable{
         client.shutdown();
         if(error != null){

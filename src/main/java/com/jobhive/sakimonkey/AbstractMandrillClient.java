@@ -118,7 +118,7 @@ public abstract class AbstractMandrillClient {
     
     /**
      * 
-     * @return
+     * @return default HostnameVerifier object
      */
     protected HostnameVerifier createHostnameVerifier(){
         return new DefaultHostnameVerifier();
