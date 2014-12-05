@@ -73,7 +73,7 @@ Mandrill(Async)Client takes 2 arguments. The first one is apiKey and
 the second one is configuration file. You can pass configuration file     
 path if you want to override default configuration. The path can be either     
 file path such as "/home/saki/myconfig.conf" or classpath such as "classpath:myconfig.conf"     
-Example configuration is in [src/main/resource/reference.conf](src/main/resource/reference.conf)    
+Example configuration is in [src/main/resources/reference.conf](src/main/resources/reference.conf)    
 Define the same name to override the default one.    
 
 **Example.**    
