@@ -76,8 +76,6 @@ file path such as "/home/saki/myconfig.conf" or classpath such as "classpath:myc
 Example configuration is in [src/main/resources/reference.conf](src/main/resources/reference.conf)    
 Define the same name to override the default one.    
 
-**Example.**    
-
 ```Java
     new MandrillAsyncClient("${apiKey}", null).api()
       .users().info(new ObjectResponseCallback<UserInfo>() {
@@ -132,11 +130,11 @@ You can choose to send it in either synchronous or asynchronous fashion.
 ```
 You can use variables in your template because Mandrill supports handlebars     
 and mailchimp's merged variable. You can embedded image to the template.   
-Just make sure that you put matching name in image tag as well.    
+Just make sure that you put matching name in an image tag as well.    
 After adding image to the message like the following    
-.addImage(new EmbeddedImage("banana", "/home/myhome/banana.gif"));    
+```.addImage(new EmbeddedImage("banana", "/home/myhome/banana.gif"));```    
 You have to provide the matching name to src of img in template    
-<img src="cid:banana"></img>     
+```<img src="cid:banana"></img>```     
 
 
                       ================================================
