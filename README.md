@@ -20,13 +20,14 @@ be a good idea when they are not designed for that purpose in the first place.
   This API gives you the callback. The current thread will not be blocked when you call 
   Future.get() and your code in callback method is still running concurrently.
 - Strong type support. You don't have to worry about type and casting.
-- Intuitive and concise API. You will feel natural like sitting beside Saki-Monkey in 
-  the jungle when you're coding
+- Base64 file and image attachment.
 - Proxy support
 - The only configuration that you need to make it run is apiKey. You can either put it 
   in the configuration file or pass it as an argument. Saki is customizable and it ships
   with default configurations that work most of the cases.
-
+- Intuitive and concise API. You will feel natural like sitting beside Saki-Monkey in 
+  the jungle when you're coding
+  
 ##Set up your project dependencies
 Saki-Monkey is available on Maven Central
 
