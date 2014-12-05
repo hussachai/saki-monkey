@@ -1,5 +1,10 @@
 package com.jobhive.sakimonkey.data.request;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -7,9 +12,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.commons.codec.binary.Base64;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.jobhive.sakimonkey.exception.IORuntimeException;
 import com.jobhive.sakimonkey.utils.Assert;
+import com.jobhive.sakimonkey.utils.IOUtils;
 import com.jobhive.sakimonkey.utils.Literal;
 
 /**
@@ -218,7 +227,12 @@ public class Message {
         this.html = html;
         return this;
     }
-
+    
+    public Message setHtml(File htmlFile){
+        this.html = IOUtils.readFileToString(htmlFile);
+        return this;
+    }
+    
     public String getText() {
         return text;
     }
@@ -1026,6 +1040,19 @@ public class Message {
             return this;
         }
 
+        public Attachment setContent(File file){
+            try{
+                Path path = Paths.get(file.getPath());
+                if(type == null){
+                    this.type = Files.probeContentType(path);
+                }
+                byte[] data = Files.readAllBytes(path);
+                this.content = Base64.encodeBase64String(data);
+            }catch(IOException e){
+                throw new IORuntimeException(e);
+            }
+            return this;
+        }
     }
     
     /**
@@ -1035,6 +1062,13 @@ public class Message {
      */
     public static class EmbeddedImage extends Attachment {
 
+        public EmbeddedImage(){}
+        
+        public EmbeddedImage(String name, String filePath){
+            setName(name);
+            setContent(new File(filePath));
+        }
+        
         /**
          * the MIME type of the image - must start with "image/"
          */

@@ -6,7 +6,6 @@ import java.util.Map;
 
 import com.jobhive.sakimonkey.Defaults;
 import com.jobhive.sakimonkey.MandrillClient;
-import com.jobhive.sakimonkey.api.async.callback.ObjectResponseCallback;
 import com.jobhive.sakimonkey.data.Result;
 import com.jobhive.sakimonkey.data.request.Message;
 import com.jobhive.sakimonkey.data.request.MessageSearchParams;
@@ -66,8 +65,7 @@ public class MessageApi extends MandrillApi {
      * @param callback
      * @return
      */
-    public Result<MessageStatus[]> send(Message message,
-            ObjectResponseCallback<MessageStatus[]> callback) {
+    public Result<MessageStatus[]> send(Message message) {
         // sendAt = null (send immediately)
         return send(message, null, null, null);
     }
