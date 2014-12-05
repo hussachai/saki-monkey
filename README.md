@@ -69,11 +69,11 @@ libraryDependencies += "com.jobhive.saki-monkey" % "saki-monkey" % "1.0.0-SNAPSH
 ##Examples
 ###Ask Mandrill who you are.
 
-Client takes 2 arguments. The first one is apiKey and the second one is     
-configuration file. You can pass configuration file path if you want to     
-override default configuration. The path can be either file path such     
-as "/home/saki/myconfig.conf" or classpath such as "classpath:myconfig.conf"     
-Example configuration is in src/main/resource/reference.conf    
+Mandrill(Async)Client takes 2 arguments. The first one is apiKey and     
+the second one is configuration file. You can pass configuration file     
+path if you want to override default configuration. The path can be either     
+file path such as "/home/saki/myconfig.conf" or classpath such as "classpath:myconfig.conf"     
+Example configuration is in [src/main/resource/reference.conf](saki-monkey/blob/master/src/main/resource/reference.conf)    
 Define the same name to override the default one.    
 
 **Example.**    
