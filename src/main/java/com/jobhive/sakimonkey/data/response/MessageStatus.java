@@ -24,7 +24,7 @@ public class MessageStatus {
      * the sending status of the recipient - 
      * either "sent", "queued", "scheduled", "rejected", or "invalid"
      */
-    private String status;
+    private SendingStatus status;
 
     /**
      * the reason for the rejection if the recipient status is "rejected" - 
@@ -33,6 +33,11 @@ public class MessageStatus {
      */
     private String rejectReason;
 
+    @Override
+    public String toString(){
+        return email + " [" + status + "]";
+    }
+    
     public String getId() {
         return id;
     }
@@ -41,7 +46,7 @@ public class MessageStatus {
         return email;
     }
 
-    public String getStatus() {
+    public SendingStatus getStatus() {
         return status;
     }
 
@@ -49,4 +54,20 @@ public class MessageStatus {
         return rejectReason;
     }
     
+    /**
+     * 
+     * @author Hussachai
+     *
+     */
+    public static enum SendingStatus {
+        SENT, QUEUED, SCHEDULED, REJECTED, INVALID;
+        private String value;
+        SendingStatus(){
+            value = name().toLowerCase();
+        }
+        @Override
+        public String toString(){
+            return value;
+        }
+    }
 }

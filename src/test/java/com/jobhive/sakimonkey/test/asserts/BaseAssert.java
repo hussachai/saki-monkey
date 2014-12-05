@@ -14,7 +14,7 @@ import com.jobhive.sakimonkey.data.Result;
  */
 public abstract class BaseAssert {
     
-    protected static void assertError(String name, Result<?> result){
+    public static void assertError(String name, Result<?> result){
         Assert.assertTrue(result.isError());
         Assert.assertNotNull(result.getErrorInfo());
         if(name != null){
@@ -23,7 +23,7 @@ public abstract class BaseAssert {
         println("Expected Error: " + result.getErrorInfo());
     }
     
-    protected static void assertError(Result<?> result){
+    public static void assertError(Result<?> result){
         assertError(null, result);
     }
     
@@ -31,7 +31,7 @@ public abstract class BaseAssert {
      * Check that result is not null and error free
      * @param result
      */
-    protected static void assertResult(Result<?> result){
+    public static void assertResult(Result<?> result){
         Assert.assertNotNull(result);
         if(result.isError()){
             println("Error: " + result.getErrorInfo());
@@ -47,7 +47,7 @@ public abstract class BaseAssert {
      * If the argument is array, it will be converted to String by Arrays.toString()
      * @param message
      */
-    protected static void println(Object message){
+    public static void println(Object message){
         if(message == null){
             System.out.println("null <<<<<<<<<<<<<");
             return;

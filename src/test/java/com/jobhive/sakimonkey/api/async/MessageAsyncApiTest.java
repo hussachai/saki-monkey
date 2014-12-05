@@ -7,7 +7,6 @@ import com.jobhive.sakimonkey.data.request.Message;
 import com.jobhive.sakimonkey.data.response.MessageStatus;
 import com.jobhive.sakimonkey.test.BaseAsyncApiTest;
 import com.jobhive.sakimonkey.test.asserts.MessageApiAssert;
-import com.jobhive.sakimonkey.test.data.Messages;
 
 /**
  * 
@@ -22,11 +21,11 @@ public class MessageAsyncApiTest extends BaseAsyncApiTest {
     
     @Test
     public void testSend(){
-        Message message = Messages.create();
+        Message message = MessageApiAssert.createMessage(client.getContext());
         wait(api().send(message, new TestCallback<MessageStatus[]>() {
             @Override
             public void willTest(Result<MessageStatus[]> result) {
-                MessageApiAssert.assertMessageStatuses(result);
+                MessageApiAssert.assertMessageStatuses(result, 1);
             }
         }));
     }

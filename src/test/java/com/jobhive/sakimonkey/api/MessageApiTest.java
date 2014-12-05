@@ -1,13 +1,10 @@
 package com.jobhive.sakimonkey.api;
 
-import java.io.IOException;
-
 import org.testng.annotations.Test;
 
 import com.jobhive.sakimonkey.data.request.Message;
 import com.jobhive.sakimonkey.test.BaseSyncApiTest;
 import com.jobhive.sakimonkey.test.asserts.MessageApiAssert;
-import com.jobhive.sakimonkey.test.data.Messages;
 
 /**
  * 
@@ -27,9 +24,16 @@ public class MessageApiTest extends BaseSyncApiTest {
     }
     
     @Test
-    public void testSend() throws IOException{
-        
-        Message message = Messages.create();
-        MessageApiAssert.assertMessageStatuses(api.send(message));
+    public void testSend(){
+        Message message = MessageApiAssert.createMessage(client.getContext());
+        MessageApiAssert.assertMessageStatuses(api.send(message), 1);
     }
+    
+    @Test
+    public void testSendTemplate(){
+        Message message = MessageApiAssert.createMessage(client.getContext());
+        MessageApiAssert.assertError(api.sendTemplate("does not exist", message));
+    }
+    
+    
 }
