@@ -1,7 +1,6 @@
 package com.jobhive.sakimonkey.api;
 
 import com.jobhive.sakimonkey.MandrillClient;
-import com.jobhive.sakimonkey.api.async.callback.ObjectResponseCallback;
 import com.jobhive.sakimonkey.data.Result;
 import com.jobhive.sakimonkey.data.response.TrackingDomain;
 import com.jobhive.sakimonkey.data.response.UrlInfo;
@@ -20,7 +19,6 @@ public class UrlApi extends MandrillApi {
     
     /**
      * Get the 100 most clicked URLs
-     * @param callback (the 100 most clicked URLs and their stats)
      * @return
      */
     public Result<UrlInfo[]> list() {
@@ -30,7 +28,6 @@ public class UrlApi extends MandrillApi {
     /**
      * Return the 100 most clicked URLs that match the search query given
      * @param q a search query
-     * @param callback (the 100 most clicked URLs matching the search query)
      * @return
      */
     public Result<UrlInfo[]> search(String q) {
@@ -41,18 +38,15 @@ public class UrlApi extends MandrillApi {
     /**
      * Return the recent history (hourly stats for the last 30 days) for a url
      * @param url an existing URL
-     * @param callback (the array of history information)
      * @return
      */
-    public Result<TimedUrlInfo[]> timeSeries(String url, 
-            ObjectResponseCallback<TimedUrlInfo[]> callback) {
+    public Result<TimedUrlInfo[]> timeSeries(String url) {
         return getClient().execute(TimedUrlInfo[].class, URL_TIME_SERIES, 
                 mapParams("url", url));
     }
     
     /**
      * Get the list of tracking domains set up for this account
-     * @param callback (the tracking domains and their status)
      * @return
      */
     public Result<TrackingDomain[]> trackingDomains() {
@@ -63,7 +57,6 @@ public class UrlApi extends MandrillApi {
     /**
      * Add a tracking domain to your account
      * @param domain a domain name
-     * @param callback (information about the domain)
      * @return
      */
     public Result<TrackingDomain> addTrackingDomain(String domain) {
@@ -75,7 +68,6 @@ public class UrlApi extends MandrillApi {
      * Checks the CNAME settings for a tracking domain. The domain must have been 
      * added already with the add-tracking-domain call
      * @param domain an existing tracking domain name
-     * @param callback (information about the tracking domain)
      * @return
      */
     public Result<TrackingDomain> checkTrackingDomain(String domain) {

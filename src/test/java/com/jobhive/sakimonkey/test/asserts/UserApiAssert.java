@@ -26,7 +26,7 @@ public final class UserApiAssert extends BaseAssert{
         println("Username: " + userInfo.getUsername());
         println("Created At: "+userInfo.getCreatedAt());
         Assert.assertTrue(userInfo.getReputation() > 0);
-        println(userInfo.getStats().keySet());//TODO: maybe we want strong type here
+        println("Stats: %s", userInfo.getStats().keySet());//TODO: maybe we want strong type here
         return userInfo;
     }
     

@@ -1082,7 +1082,7 @@ public class Message {
         }
 
         /**
-         * the Content ID of the image - use <img src="cid:THIS_VALUE"> to reference
+         * the Content ID of the image - use &lt;img src="cid:THIS_VALUE"&gt; to reference
          * the image in your HTML content
          */
         @Override

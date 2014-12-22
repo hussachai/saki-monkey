@@ -68,7 +68,6 @@ public class MandrillClient extends AbstractMandrillClient {
         
         try (CloseableHttpResponse response = httpClient.execute(post)) {
             InputStream in = response.getEntity().getContent();
-            
             if (response.getStatusLine().getStatusCode() == 200) {
                 result = new Result<>(context.getObjectMapper()
                         .readValue(in, targetClass));

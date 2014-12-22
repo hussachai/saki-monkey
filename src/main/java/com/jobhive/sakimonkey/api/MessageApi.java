@@ -62,7 +62,6 @@ public class MessageApi extends MandrillApi {
     /**
      * 
      * @param message
-     * @param callback
      * @return
      */
     public Result<MessageStatus[]> send(Message message) {
@@ -97,7 +96,6 @@ public class MessageApi extends MandrillApi {
      *        the message will be sent immediately. An additional fee applies 
      *        for scheduled email, and this feature is only available to accounts 
      *        with a positive balance.
-     * @param callback
      * @return
      */
     public Result<MessageStatus[]> sendTemplate(String templateName,
@@ -119,7 +117,6 @@ public class MessageApi extends MandrillApi {
      * 
      * @param templateName
      * @param message
-     * @param callback
      * @return
      */
     public Result<MessageStatus[]> sendTemplate(String templateName, Message message) {
@@ -134,18 +131,16 @@ public class MessageApi extends MandrillApi {
      * the information for a single message, or webhooks to push activity to your 
      * own application for querying.
      * @param params
-     * @param callback
      * @return
      */
-    public Result<MessageStatus[]> search(MessageSearchParams params) {
-        return getClient().execute(MessageStatus[].class, MESSAGE_SEARCH, params);
+    public Result<MessageInfo[]> search(MessageSearchParams params) {
+        return getClient().execute(MessageInfo[].class, MESSAGE_SEARCH, params);
     }
     
     /**
      * Search the content of recently sent messages and return the aggregated 
      * hourly stats for matching messages
      * @param params
-     * @param callback
      * @return
      */
     public Result<TimedStats[]> searchTimeSeries(MessageSearchParams params) {
@@ -157,7 +152,6 @@ public class MessageApi extends MandrillApi {
      * Get the information for a single recently sent message
      * @param id the unique id of the message to get - passed as the "_id" field 
      *        in webhooks, send calls, or search calls
-     * @param callback
      * @return
      */
     public Result<MessageInfo> info(String id) {
@@ -169,7 +163,6 @@ public class MessageApi extends MandrillApi {
      * Get the full content of a recently sent message
      * @param id the unique id of the message to get - passed as the "_id" field 
      *        in webhooks, send calls, or search calls
-     * @param callback
      * @return
      */
     public Result<MessageContent> content(String id) {
@@ -181,7 +174,6 @@ public class MessageApi extends MandrillApi {
      * Parse the full MIME document for an email message, returning the content of 
      * the message broken into its constituent pieces
      * @param rawMessage
-     * @param callback
      * @return
      */
     public Result<ParsedMessageContent> parse(String rawMessage) {
@@ -193,7 +185,6 @@ public class MessageApi extends MandrillApi {
      * Take a raw MIME document for a message, and send it exactly as if 
      * it were sent through Mandrill's SMTP servers
      * @param rawMessage
-     * @param callback
      * @return
      */
     public Result<MessageStatus[]> sendRaw(MessageSendRawParams rawMessage) {
@@ -204,7 +195,6 @@ public class MessageApi extends MandrillApi {
     /**
      * Queries your scheduled emails by sender or recipient, or both.
      * @param toEmail an optional recipient address to restrict results to
-     * @param callback
      * @return
      */
     public Result<MessageSchedule[]> listScheduled(String toEmail) {
@@ -214,7 +204,6 @@ public class MessageApi extends MandrillApi {
     
     /**
      * 
-     * @param callback
      * @return
      */
     public Result<MessageSchedule[]> listScheduled() {
@@ -224,7 +213,6 @@ public class MessageApi extends MandrillApi {
     /**
      * Cancels a scheduled email.
      * @param id
-     * @param callback
      * @return
      */
     public Result<MessageSchedule> cancelScheduled(String id) {
@@ -239,7 +227,6 @@ public class MessageApi extends MandrillApi {
      * @param sendAt the new UTC timestamp when the message should sent. 
      *        Mandrill can't time travel, so if you specify a time in past the 
      *        message will be sent immediately
-     * @param callback
      * @return
      */
     public Result<MessageSchedule> rescheduled(String id, Date sendAt) {

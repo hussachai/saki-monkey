@@ -20,7 +20,7 @@ public abstract class BaseAssert {
         if(name != null){
             Assert.assertEquals(name, result.getErrorInfo().getName());
         }
-        println("Expected Error: " + result.getErrorInfo());
+        println("Expected Error: %s", result.getErrorInfo());
     }
     
     public static void assertError(Result<?> result){
@@ -34,12 +34,12 @@ public abstract class BaseAssert {
     public static void assertResult(Result<?> result){
         Assert.assertNotNull(result);
         if(result.isError()){
-            println("Error: " + result.getErrorInfo());
+            println("Error: %s", result.getErrorInfo());
             Assert.fail();
         }
         Assert.assertNull(result.getErrorInfo());
         Assert.assertNotNull(result.getObject());
-        println("Result: "+result.getObject());
+        println("Result: %s", result.getObject());
     }
     
     /**
@@ -47,15 +47,16 @@ public abstract class BaseAssert {
      * If the argument is array, it will be converted to String by Arrays.toString()
      * @param message
      */
-    public static void println(Object message){
-        if(message == null){
-            System.out.println("null <<<<<<<<<<<<<");
-            return;
+    public static void println(String format, Object... args){
+        for(int i=0;i<args.length;i++){
+            Object arg = args[i];
+            if(arg.getClass().isArray()){
+                args[i] = Arrays.toString((Object[])arg);
+            }
         }
-        if(message.getClass().isArray()){
-            System.out.println(Arrays.toString((Object[])message));
-        }else{
-            System.out.println(message);
+        if(!format.endsWith("\n")){
+            format += "\n";
         }
+        System.out.format(format, args);
     }
 }

@@ -11,7 +11,7 @@ public class Assert {
      * Assert that an object is not null .
      * 
      * @param object
-     * @param message
+     * @param fieldName
      */
     public static void notNull(Object object, String fieldName) {
         if (object == null) {
@@ -24,7 +24,7 @@ public class Assert {
      * and not the empty String.
      * 
      * @param text
-     * @param message
+     * @param fieldName
      */
     public static void notEmpty(String text, String fieldName) {
         if (text == null || text.length() == 0) {

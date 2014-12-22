@@ -1,9 +1,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.jobhive.saki-monkey</groupId>
+    <groupId>com.jobhive</groupId>
     <artifactId>saki-monkey</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0-BETA</version>
     <packaging>jar</packaging>
     <name>SakiMonkey</name>
     <description>Asynchronous Mandrill Restful API Client for JVM</description>
@@ -32,10 +32,16 @@
             <organizationUrl>http://www.jobhive.com</organizationUrl>
         </developer>
     </developers>
-
+    
+    <scm>
+        <connection>scm:git:git://github.com/JobHive/saki-monkey.git</connection>
+        <developerConnection>scm:git:git@github.com:JobHive/saki-monkey.git</developerConnection>
+        <url>http://github.com/JobHive/saki-monkey</url>
+    </scm>
+    
     <properties>
-        <maven.javadoc.skip>true</maven.javadoc.skip>
-        
+        <maven.javadoc.skip>false</maven.javadoc.skip>
+
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.7</java.version>
         <config.version>1.2.1</config.version>
@@ -43,7 +49,7 @@
         <jackson.version>2.3.3</jackson.version>
         <commons-codec.version>1.10</commons-codec.version>
         <slf4j.version>1.7.7</slf4j.version>
-        
+
         <testng.version>6.8.8</testng.version>
         <logback.version>1.1.2</logback.version>
     </properties>
@@ -100,6 +106,14 @@
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.18</version>
+                <configuration>
+                    <skipTests>true</skipTests>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.2</version>
                 <configuration>
@@ -124,7 +138,14 @@
                     </archive>
                 </configuration>
             </plugin>
-
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>2.8.2</version>
+                <configuration>
+                    <uniqueVersion>false</uniqueVersion>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.sonatype.plugins</groupId>
                 <artifactId>nexus-staging-maven-plugin</artifactId>

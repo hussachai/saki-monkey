@@ -29,7 +29,6 @@ public class SenderApi extends MandrillApi {
     
     /**
      * Returns the sender domains that have been added to this account.
-     * @param callback (an array of sender domain data, one for each sending domain used by the account)
      * @return 
      */
     public Result<Domain[]> domains() {
@@ -40,7 +39,6 @@ public class SenderApi extends MandrillApi {
      * Adds a sender domain to your account. Sender domains are added automatically 
      * as you send, but you can use this call to add them ahead of time.
      * @param domain a domain name
-     * @param callback (information about the domain)
      * @return 
      */
     public Result<Domain> addDomain(String domain) {
@@ -53,7 +51,6 @@ public class SenderApi extends MandrillApi {
      * this domain to your account, it will be added automatically.
      * 
      * @param domain a domain name
-     * @param callback (information about the sender domain)
      * @return 
      */
     public Result<Domain> checkDomain(String domain) {
@@ -71,7 +68,6 @@ public class SenderApi extends MandrillApi {
      * 
      * @param domain a domain name at which you can receive email
      * @param mailbox a mailbox at the domain where the verification email should be sent
-     * @param callback (information about the verification that was sent)
      * @return 
      */
     public Result<Domain> verifyDomain(String domain, String mailbox) {
@@ -83,7 +79,6 @@ public class SenderApi extends MandrillApi {
      * Return more detailed information about a single sender, including aggregates 
      * of recent stats
      * @param address the email address of the sender
-     * @param callback (the detailed information on the sender)
      * @return
      */
     public Result<SenderInfo> info(String address) {
@@ -94,7 +89,6 @@ public class SenderApi extends MandrillApi {
     /**
      * Return the recent history (hourly stats for the last 30 days) for a sender
      * @param address the email address of the sender
-     * @param callback (the array of history information)
      * @return 
      */
     public Result<TimedStats[]> timeSerieis(String address) {
